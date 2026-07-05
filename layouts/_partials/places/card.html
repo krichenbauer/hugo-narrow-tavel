@@ -1,0 +1,65 @@
+{{- $page := .page -}}
+{{- $hero := false -}}
+{{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
+  {{- if not $hero -}}
+    {{- with $page.Resources.GetMatch . -}}
+      {{- $hero = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $hero -}}
+  {{- with index ($page.Resources.ByType "image") 0 -}}
+    {{- $hero = . -}}
+  {{- end -}}
+{{- end -}}
+
+<article class="travel-card rounded-xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+  <a href="{{ $page.RelPermalink }}" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600">
+    {{ if $hero }}
+      {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType }}
+      {{ $alt := $hero.Params.alt | default $page.Title }}
+      {{ if $isRaster }}
+        {{ $thumb := $hero.Fill "720x480" }}
+        <img
+          src="{{ $thumb.RelPermalink }}"
+          alt="{{ $alt }}"
+          width="{{ $thumb.Width }}"
+          height="{{ $thumb.Height }}"
+          loading="lazy"
+          decoding="async"
+          class="h-44 w-full rounded-t-xl object-cover"
+        />
+      {{ else }}
+        <img
+          src="{{ $hero.RelPermalink }}"
+          alt="{{ $alt }}"
+          loading="lazy"
+          decoding="async"
+          class="h-44 w-full rounded-t-xl object-cover"
+        />
+      {{ end }}
+    {{ else }}
+      <div class="flex h-44 items-center justify-center rounded-t-xl bg-neutral-100 text-neutral-500">No image</div>
+    {{ end }}
+
+    <div class="space-y-3 p-4">
+      <h3 class="text-lg font-semibold leading-snug">{{ $page.Title }}</h3>
+
+      {{ with $page.Summary | plainify }}
+        <p class="line-clamp-3 text-sm text-neutral-700">{{ . }}</p>
+      {{ end }}
+
+      {{ with $page.GetTerms "categories" }}
+        <div class="flex flex-wrap gap-2" aria-label="Categories">
+          {{ range . }}
+            <span class="travel-badge">{{ .LinkTitle }}</span>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ with $page.Params.district }}
+        <p class="text-sm text-neutral-700"><strong>District:</strong> {{ . }}</p>
+      {{ end }}
+    </div>
+  </a>
+</article>

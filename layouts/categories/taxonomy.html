@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <section class="mx-auto px-4 py-6">
+    <header class="mb-8">
+      <h1 class="mb-2 text-3xl font-bold">{{ .Title }}</h1>
+      <p class="text-neutral-700">Browse categories for places.</p>
+    </header>
+
+    {{ if gt (len .Data.Terms) 0 }}
+      <div class="flex flex-wrap gap-3">
+        {{ range .Data.Terms.Alphabetical }}
+          <a href="{{ .Page.RelPermalink }}" class="travel-badge travel-badge-lg">
+            {{ .Page.LinkTitle }}
+            <span class="ml-1 text-xs opacity-80">({{ .Count }})</span>
+          </a>
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-neutral-600">No categories found.</p>
+    {{ end }}
+  </section>
+{{ end }}

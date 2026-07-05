@@ -1,0 +1,43 @@
+{{- $markers := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- $page := . -}}
+  {{- $coords := $page.Params.coordinates -}}
+  {{- if and $coords $coords.latitude $coords.longitude -}}
+    {{- $hero := false -}}
+    {{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
+      {{- if not $hero -}}
+        {{- with $page.Resources.GetMatch . -}}
+          {{- $hero = . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if not $hero -}}
+      {{- with index ($page.Resources.ByType "image") 0 -}}
+        {{- $hero = . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $thumb := "" -}}
+    {{- if $hero -}}
+      {{- if in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType -}}
+        {{- $thumbImg := $hero.Fill "320x210" -}}
+        {{- $thumb = $thumbImg.RelPermalink -}}
+      {{- else -}}
+        {{- $thumb = $hero.RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $marker := dict
+      "title" $page.Title
+      "summary" ($page.Summary | plainify)
+      "permalink" $page.RelPermalink
+      "categories" ($page.Params.categories | default (slice))
+      "district" ($page.Params.district | default "")
+      "latitude" $coords.latitude
+      "longitude" $coords.longitude
+      "thumbnail" $thumb
+    -}}
+    {{- $markers = $markers | append $marker -}}
+  {{- end -}}
+{{- end -}}
+{{- $markers | jsonify -}}

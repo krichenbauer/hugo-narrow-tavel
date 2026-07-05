@@ -1,0 +1,48 @@
+{{- $page := .page -}}
+{{- $hero := false -}}
+{{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
+  {{- if not $hero -}}
+    {{- with $page.Resources.GetMatch . -}}
+      {{- $hero = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $hero -}}
+  {{- with index ($page.Resources.ByType "image") 0 -}}
+    {{- $hero = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $hero -}}
+  {{- $alt := $hero.Params.alt | default $page.Params.hero_alt | default $page.Title -}}
+  {{- $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType -}}
+  <figure class="travel-hero not-prose">
+    {{- if $isRaster -}}
+      {{- $small := $hero.Fit "640x360" -}}
+      {{- $medium := $hero.Fit "960x540" -}}
+      {{- $large := $hero.Fit "1440x810" -}}
+      <img
+        src="{{ $large.RelPermalink }}"
+        srcset="{{ $small.RelPermalink }} 640w, {{ $medium.RelPermalink }} 960w, {{ $large.RelPermalink }} 1440w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+        width="{{ $large.Width }}"
+        height="{{ $large.Height }}"
+        alt="{{ $alt }}"
+        loading="eager"
+        decoding="async"
+        class="h-auto w-full rounded-xl border border-neutral-200 object-cover shadow-sm"
+      />
+    {{- else -}}
+      <img
+        src="{{ $hero.RelPermalink }}"
+        alt="{{ $alt }}"
+        loading="eager"
+        decoding="async"
+        class="h-auto w-full rounded-xl border border-neutral-200 object-cover shadow-sm"
+      />
+    {{- end -}}
+    {{ with $hero.Title }}
+      <figcaption class="mt-2 text-sm text-neutral-600">{{ . }}</figcaption>
+    {{ end }}
+  </figure>
+{{- end -}}

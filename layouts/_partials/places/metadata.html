@@ -1,0 +1,62 @@
+{{- $page := .page -}}
+{{- $coords := $page.Params.coordinates -}}
+<section class="travel-meta rounded-xl border border-neutral-200 bg-white/70 p-4">
+  <h2 class="mb-3 text-lg font-semibold">Practical Info</h2>
+
+  {{ with $page.GetTerms "categories" }}
+    <div class="mb-3 flex flex-wrap gap-2" aria-label="Categories">
+      {{ range . }}
+        <a class="travel-badge" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  <dl class="grid gap-2 text-sm">
+    {{ with $page.Params.district }}
+      <div class="grid grid-cols-[8rem_1fr] gap-2">
+        <dt class="font-medium text-neutral-700">District</dt>
+        <dd>{{ . }}</dd>
+      </div>
+    {{ end }}
+
+    {{ with $page.Params.address }}
+      <div class="grid grid-cols-[8rem_1fr] gap-2">
+        <dt class="font-medium text-neutral-700">Address</dt>
+        <dd>{{ . }}</dd>
+      </div>
+    {{ end }}
+
+    {{ with $page.Params.opening_hours }}
+      <div class="grid grid-cols-[8rem_1fr] gap-2">
+        <dt class="font-medium text-neutral-700">Opening Hours</dt>
+        <dd>{{ . }}</dd>
+      </div>
+    {{ end }}
+
+    {{ with $page.Params.website }}
+      <div class="grid grid-cols-[8rem_1fr] gap-2">
+        <dt class="font-medium text-neutral-700">Website</dt>
+        <dd><a class="travel-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a></dd>
+      </div>
+    {{ end }}
+
+    {{ with $coords }}
+      {{ with and .latitude .longitude }}
+        <div class="grid grid-cols-[8rem_1fr] gap-2">
+          <dt class="font-medium text-neutral-700">Coordinates</dt>
+          <dd>{{ $coords.latitude }}, {{ $coords.longitude }}</dd>
+        </div>
+        <div class="mt-2">
+          <a
+            class="travel-button"
+            href="https://www.openstreetmap.org/?mlat={{ $coords.latitude }}&mlon={{ $coords.longitude }}#map=16/{{ $coords.latitude }}/{{ $coords.longitude }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open in OpenStreetMap
+          </a>
+        </div>
+      {{ end }}
+    {{ end }}
+  </dl>
+</section>

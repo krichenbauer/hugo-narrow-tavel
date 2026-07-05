@@ -1,0 +1,1 @@
+{{ partial "places/map-markers.json.html" . }}

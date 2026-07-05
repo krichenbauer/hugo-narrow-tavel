@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <section class="mx-auto px-4 py-6">
+    <header class="mb-8">
+      <h1 class="mb-3 text-3xl font-bold">{{ .Title }}</h1>
+      {{ with .Content }}
+        <div class="prose prose-neutral max-w-none dark:prose-invert">{{ . }}</div>
+      {{ end }}
+    </header>
+
+    {{ $featured := where .Pages "Params.featured" true }}
+    {{ $others := where .Pages "Params.featured" "!=" true }}
+    {{ $pages := $featured | append $others }}
+
+    {{ if gt (len $pages) 0 }}
+      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        {{ range $pages }}
+          {{ partial "places/card.html" (dict "page" .) }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-neutral-600">No places found yet.</p>
+    {{ end }}
+  </section>
+{{ end }}
