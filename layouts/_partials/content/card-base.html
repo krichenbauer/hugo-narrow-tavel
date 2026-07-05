@@ -65,6 +65,10 @@
             </time>
           </div>
 
+          <div class="flex items-center gap-1.5">
+            {{ partial "content/rating-stars.html" (dict "rating" $page.Params.rating) }}
+          </div>
+
           {{ if $page.ReadingTime }}
             <div class="flex items-center gap-1.5">
               {{ partial "features/icon.html" (dict "name" "clock" "size" "sm" "ariaLabel" "") }}

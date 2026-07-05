@@ -73,6 +73,10 @@
           </div>
         {{ end }}
 
+        <div class="flex items-center gap-1.5">
+          {{ partial "content/rating-stars.html" (dict "rating" $page.Params.rating) }}
+        </div>
+
         {{ with $page.GetTerms "categories" }}
           <div class="ml-auto flex flex-wrap items-center gap-1.5 md:ml-0" aria-label="Kategorien">
             {{ range . }}

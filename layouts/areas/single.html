@@ -1,0 +1,87 @@
+{{ define "main" }}
+  {{ $district := .Params.district | default .Title }}
+  {{ $highlightSlugs := .Params.highlight_places }}
+
+  <article class="mx-auto w-full px-4 py-6">
+    <header class="mb-6 space-y-3">
+      <h1 class="text-3xl font-bold md:text-4xl">{{ .Title }}</h1>
+      <div>
+        {{ partial "content/rating-stars.html" (dict "rating" .Params.rating) }}
+      </div>
+      {{ with .Summary }}
+        <p class="text-muted-foreground max-w-3xl text-base md:text-lg">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <div class="grid gap-8 lg:grid-cols-[2fr_1fr]">
+      <div class="min-w-0 space-y-8">
+        <div class="prose prose-neutral max-w-none dark:prose-invert">
+          {{ .Content }}
+        </div>
+
+        {{ $highlightPages := slice }}
+        {{ if and $highlightSlugs (gt (len $highlightSlugs) 0) }}
+          {{ range $highlightSlugs }}
+            {{ with $.Site.GetPage (printf "/places/%s" .) }}
+              {{ $highlightPages = $highlightPages | append . }}
+            {{ end }}
+          {{ end }}
+        {{ else }}
+          {{ $highlightPages = where .Site.RegularPages "Section" "places" }}
+          {{ $highlightPages = where $highlightPages "Params.district" $district }}
+        {{ end }}
+
+        {{ if gt (len $highlightPages) 0 }}
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold">Beispielorte in {{ .Title }}</h2>
+            <p class="text-muted-foreground text-sm">Ausgewaehlte Beispiele, damit der Fokus auf dem Gebiet bleibt.</p>
+            <div class="space-y-4">
+              {{ range $highlightPages }}
+                {{ partial "places/card.html" (dict "page" .) }}
+              {{ end }}
+            </div>
+          </section>
+        {{ end }}
+      </div>
+
+      <aside class="space-y-4 lg:sticky lg:top-28 lg:self-start">
+        <section class="bg-card text-card-foreground border-border rounded-xl border p-4">
+          <h2 class="mb-3 text-lg font-semibold">Gebietsprofil</h2>
+
+          {{ with .Params.best_for }}
+            <div class="mb-3">
+              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Geeignet fuer</h3>
+              <div class="flex flex-wrap gap-2">
+                {{ range . }}
+                  <span class="bg-muted/50 border-muted/30 rounded-md border px-2 py-0.5 text-xs font-medium">{{ . }}</span>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+
+          {{ with .Params.food_focus }}
+            <div class="mb-3">
+              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Essen</h3>
+              <ul class="text-sm space-y-1">
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            </div>
+          {{ end }}
+
+          {{ with .Params.shopping_focus }}
+            <div>
+              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Shopping</h3>
+              <ul class="text-sm space-y-1">
+                {{ range . }}
+                  <li>{{ . }}</li>
+                {{ end }}
+              </ul>
+            </div>
+          {{ end }}
+        </section>
+      </aside>
+    </div>
+  </article>
+{{ end }}

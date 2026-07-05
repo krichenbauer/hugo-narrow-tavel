@@ -1,0 +1,25 @@
+{{- $rating := 0 -}}
+{{- with .rating -}}
+  {{- $rating = int . -}}
+{{- end -}}
+{{- if lt $rating 0 -}}
+  {{- $rating = 0 -}}
+{{- end -}}
+{{- if gt $rating 3 -}}
+  {{- $rating = 3 -}}
+{{- end -}}
+
+{{- $legend := "3 Sterne: Aussergewoehnlich, nicht verpassen. 2 Sterne: Empfohlen. 1 Stern: Gut, wenn du zusaetzliche Zeit hast." -}}
+
+<span class="inline-flex items-center gap-2" title="{{ $legend }}" aria-label="{{ $legend }}">
+  <span class="text-muted-foreground text-xs font-medium">Bewertung</span>
+  <span class="inline-flex items-center gap-0.5 leading-none">
+    {{- range seq 1 3 -}}
+      {{- if le . $rating -}}
+        <span class="text-primary text-sm">&#9733;</span>
+      {{- else -}}
+        <span class="text-muted-foreground/50 text-sm">&#9734;</span>
+      {{- end -}}
+    {{- end -}}
+  </span>
+</span>

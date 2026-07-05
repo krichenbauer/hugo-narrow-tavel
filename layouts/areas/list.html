@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <section class="mx-auto px-4 py-6">
+    <header class="mb-8">
+      <h1 class="mb-3 text-3xl font-bold">{{ .Title }}</h1>
+      {{ with .Content }}
+        <div class="prose prose-neutral max-w-none dark:prose-invert">{{ . }}</div>
+      {{ end }}
+    </header>
+
+    {{ $areas := .Pages.ByWeight }}
+    {{ if gt (len $areas) 0 }}
+      <div class="space-y-4">
+        {{ range $areas }}
+          {{ partial "content/card-base.html" (dict "page" .) }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-muted-foreground">Noch keine Gebiete vorhanden.</p>
+    {{ end }}
+  </section>
+{{ end }}
