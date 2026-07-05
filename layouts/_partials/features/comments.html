@@ -1,6 +1,5 @@
 
 
-*/}}
 
 {{- $commentsConfig := dict
   "enabled" false
@@ -16,7 +15,6 @@
 {{- end -}}
 
 {{- if and $commentsConfig.enabled $commentsConfig.system -}}
-  {{- $commentSystem := $commentsConfig.system -}}
   <section
     id="comments"
     class="bg-card border-border mx-auto mt-12 rounded-2xl border p-8 px-4 shadow-sm"
@@ -28,23 +26,7 @@
       </h2>
 
       <div class="comments-container">
-        {{- if eq $commentSystem "giscus" -}}
-          {{ partial "features/comments/giscus.html" (dict "Site" $.Site "Page" $ "id" "giscus-comments") }}
-        {{- else if eq $commentSystem "disqus" -}}
-          {{ partial "features/comments/disqus.html" (dict "Site" $.Site "Page" $ "id" "disqus-comments") }}
-        {{- else if eq $commentSystem "utterances" -}}
-          {{ partial "features/comments/utterances.html" (dict "Site" $.Site "Page" $ "id" "utterances-comments") }}
-        {{- else if eq $commentSystem "waline" -}}
-          {{ partial "features/comments/waline.html" (dict "Site" $.Site "Page" $ "id" "waline-comments") }}
-        {{- else if eq $commentSystem "artalk" -}}
-          {{ partial "features/comments/artalk.html" (dict "Site" $.Site "Page" $ "id" "artalk-comments") }}
-        {{- else if eq $commentSystem "twikoo" -}}
-          {{ partial "features/comments/twikoo.html" (dict "Site" $.Site "Page" $ "id" "twikoo-comments") }}
-        {{- else if eq $commentSystem "comentario" -}}
-          {{ partial "features/comments/comentario.html" (dict "Site" $.Site "Page" $ "id" "comentario-comments") }}
-        {{- else -}}
-          {{ partial "features/comments/notice.html" (dict "icon" "alert-circle") }}
-        {{- end -}}
+        {{ partial "features/comments/notice.html" (dict "icon" "alert-circle" "message" "Comment integrations were removed for privacy." "id" "comments-disabled") }}
       </div>
     </div>
   </section>

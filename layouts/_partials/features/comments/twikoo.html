@@ -1,51 +1,5 @@
 
 
-*/}}
 
-{{ $id := .id | default "twikoo-comments" }}
-{{ $config := .Site.Params.comments.twikoo }}
-
-{{ if $config.envId }}
-  <div id="{{ $id }}" class="twikoo-container"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js"></script>
-
-  <script>
-    (function() {
-      'use strict';
-
-      twikoo.init({
-        envId: '{{ $config.envId }}',
-        el: '#{{ $id }}',
-        {{ if $config.region }}region: '{{ $config.region }}',{{ end }}
-        {{ if $config.path }}path: '{{ $config.path }}',{{ else }}path: '{{ .Page.RelPermalink }}',{{ end }}
-        lang: '{{ $config.lang | default .Site.Language.Locale | default "en-US" }}',
-      });
-
-      function updateTwikooTheme() {
-        const isDark = document.documentElement.classList.contains('dark');
-
-        if (window.twikoo && window.twikoo.update) {
-          window.twikoo.update();
-        }
-      }
-
-      document.addEventListener('themeChanged', updateTwikooTheme);
-
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-            updateTwikooTheme();
-          }
-        });
-      });
-
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class']
-      });
-    })();
-  </script>
-{{ else }}
-  {{ partial "features/comments/notice.html" (dict "id" $id "icon" "message-circle") }}
-{{ end }}
+{{- $id := .id | default "twikoo-comments" -}}
+{{ partial "features/comments/notice.html" (dict "id" $id "icon" "alert-circle" "message" "Comment integrations were removed for privacy.") }}

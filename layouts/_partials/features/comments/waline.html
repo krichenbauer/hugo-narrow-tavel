@@ -1,25 +1,5 @@
 
 
-*/}}
 
-{{ $id := .id | default "waline-comments" }}
-{{ $config := .Site.Params.comments.waline }}
-
-{{ if $config.serverURL }}
-  <div id="{{ $id }}" class="waline-container"></div>
-
-  <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-
-  <script type="module">
-    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-
-    init({
-      el: '#{{ $id }}',
-      serverURL: '{{ $config.serverURL }}',
-      dark: "html[class='dark']",
-      lang: '{{ $config.lang | default .Site.Language.Locale | default "en-US" }}',
-    });
-  </script>
-{{ else }}
-  {{ partial "features/comments/notice.html" (dict "id" $id "icon" "message-circle") }}
-{{ end }}
+{{- $id := .id | default "waline-comments" -}}
+{{ partial "features/comments/notice.html" (dict "id" $id "icon" "alert-circle" "message" "Comment integrations were removed for privacy.") }}

@@ -2,7 +2,7 @@
 description: "A modern, clean, and minimal Hugo theme built with Tailwind CSS 4.0. Support custom themes, dark mode, and responsive design."
 keywords: ["Hugo", "Blog", "Theme", "Technology", "Programming"]
 defaultAuthor: "Hugo Narrow"
-language: "en"
+language: "de"
 shortName: "Hugo Narrow" # PWA
 images:
   - "/images/og-default.avif"
@@ -37,7 +37,7 @@ header:
   # UI Components Control (header controls)
   showThemeSwitch: true # Set to false to hide theme style switcher (palette icon)
   showDarkModeSwitch: true # Set to false to hide dark mode switcher (sun/moon icon)
-  showLanguageSwitch: true # Set to false to hide language switcher
+  showLanguageSwitch: false # Set to false to hide language switcher
   languageSwitchMode: "dropdown" # Language switch mode: "dropdown" (show panel) or "cycle" (direct cycle)
 
 # Dock display mode
@@ -135,7 +135,7 @@ comments:
     emitMetadata: "0"
     inputPosition: "bottom"
     theme: "preferred_color_scheme"
-    lang: "en"
+    lang: "de"
   disqus:
     shortname: ""
   utterances:
@@ -145,22 +145,22 @@ comments:
     theme: "preferred-color-scheme"
   waline:
     serverURL: ""
-    lang: "en-US"
+    lang: "de-DE"
   artalk:
     server: ""
     site: ""
-    locale: "en-US" # String|Object|"auto"
+    locale: "de-DE" # String|Object|"auto"
     darkMode: "auto"
     gravatar:
-      mirror: "https://cravatar.cn/avatar/"
+      mirror: ""
   twikoo:
     envId: ""
     region: "ap-shanghai"
     path: ""
-    lang: "en-US"
+    lang: "de-DE"
   comentario:
     server: ""
-    lang: "en-US"
+    lang: "de-DE"
     theme: "" # light, dark, or empty to follow browser preference
     domainId: ""
     cssOverride: ""
@@ -185,7 +185,7 @@ analytics:
   umami:
     enabled: false
     id: "your-umami-website-id"
-    src: "https://umami.com/myscript.js"
+    src: ""
     domains: "example.domain.com"
 
 # KaTeX

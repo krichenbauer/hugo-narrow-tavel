@@ -20,8 +20,8 @@
   (hasPrefix $src "blob:")
 -}}
   {{- $isExternal = true -}}
-  {{- $resourceType = "external" -}}
-  {{- $finalUrl = $src -}}
+  {{- $resourceType = "blocked-external" -}}
+  {{- $finalUrl = "" -}}
 {{- else -}}
   {{- if hasPrefix $src "./" -}}
     {{- $searchPath = strings.TrimPrefix "./" $src -}}
@@ -57,22 +57,26 @@
 {{- end -}}
 
 {{- if or (eq $outputType "img") (eq $outputType "both") -}}
-  <img
-    src="{{ $finalUrl }}"
-    alt="{{ $alt }}"
-    {{ with $caption }}title="{{ . }}"{{ end }}
-    {{ if and $resource (not $isExternal) }}
-      {{ $mediaType := $resource.MediaType.SubType }}
-      {{ if in (slice "jpeg" "jpg" "png" "gif" "webp" "svg") $mediaType }}
-        {{ if ne $mediaType "svg" }}
-          width="{{ $resource.Width }}" height="{{ $resource.Height }}"
+  {{- if and (not $isExternal) $finalUrl -}}
+    <img
+      src="{{ $finalUrl }}"
+      alt="{{ $alt }}"
+      {{ with $caption }}title="{{ . }}"{{ end }}
+      {{ if and $resource (not $isExternal) }}
+        {{ $mediaType := $resource.MediaType.SubType }}
+        {{ if in (slice "jpeg" "jpg" "png" "gif" "webp" "svg") $mediaType }}
+          {{ if ne $mediaType "svg" }}
+            width="{{ $resource.Width }}" height="{{ $resource.Height }}"
+          {{ end }}
         {{ end }}
       {{ end }}
-    {{ end }}
-    loading="lazy"
-    decoding="async"
-    data-gallery-src="{{ $finalUrl }}"
-    data-gallery-alt="{{ $alt }}"
-    data-gallery-title="{{ $caption }}"
-  />
+      loading="lazy"
+      decoding="async"
+      data-gallery-src="{{ $finalUrl }}"
+      data-gallery-alt="{{ $alt }}"
+      data-gallery-title="{{ $caption }}"
+    />
+  {{- else -}}
+    <span class="sr-only">External image source blocked.</span>
+  {{- end -}}
 {{- end -}}

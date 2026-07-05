@@ -1,11 +1,11 @@
 baseURL: https://example.org/
-locale: en
-defaultContentLanguage: en
+locale: de-DE
+defaultContentLanguage: de
 defaultContentLanguageInSubdir: false
 title: Hugo Narrow
 theme: "hugo-narrow"
 
-hasCJKLanguage: true
+hasCJKLanguage: false
 enableEmoji: true
 
 

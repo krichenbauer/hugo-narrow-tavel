@@ -1,32 +1,4 @@
-<!-- bilibili.html -->
-{{ $vid := (.Get 0) }}
-{{ $videopage := default 1 (.Get 1) }}
-{{ $basicQuery := querify "page" $videopage "high_quality" 1 "as_wide" 1 }}
-{{ $videoQuery := "" }}
-{{ if strings.HasPrefix (lower $vid) "av" }}
-  {{ $videoQuery = querify "aid" (strings.TrimPrefix "av" (lower $vid)) }}
-{{ else if strings.HasPrefix (lower $vid) "bv" }}
-  {{ $videoQuery = querify "bvid" $vid }}
-{{ else }}
-  <div class="bg-destructive/10 border-destructive/20 my-8 rounded-lg border p-4">
-    <p class="text-destructive font-medium">
-    </p>
-    <p class="text-muted-foreground mt-2 text-sm">
-    </p>
-  </div>
-{{ end }}
-<div
-  class="bg-card border-border my-8 overflow-hidden rounded-lg border shadow-md transition-shadow duration-300 hover:shadow-lg"
->
-  <div class="h-96 md:h-[500px] lg:h-[600px]">
-    <iframe
-      src="https://player.bilibili.com/player.html?{{ $basicQuery | safeURL }}&{{ $videoQuery | safeURL }}"
-      class="h-full w-full"
-      scrolling="no"
-      frameborder="no"
-      framespacing="0"
-      allowfullscreen="true"
-    >
-    </iframe>
-  </div>
+<div class="bg-destructive/10 border-destructive/20 my-8 rounded-lg border p-4">
+  <p class="text-destructive font-medium">External embeds are disabled in this theme variant.</p>
+  <p class="text-muted-foreground mt-2 text-sm">The bilibili shortcode was intentionally disabled for privacy.</p>
 </div>

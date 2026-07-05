@@ -1,31 +1,4 @@
-en:
-  locale: en
-  label: "English"
+de:
+  locale: de-DE
+  label: "Deutsch"
   weight: 1
-  # Optional: override site-level dateFormat from params.yaml per language
-  # params:
-  #   dateFormat:
-  #     long: "January 2, 2006"
-  #     medium: "Jan 2, 2006"
-  #     short: "01/02"
-
-# ja:
-#   locale: ja-JP
-#   weight: 3
-
-# fr:
-#   locale: fr-FR
-#   weight: 4
-
-# de:
-#   locale: de-DE
-#   label: "Deutsch"
-#   weight: 5
-
-# es:
-#   locale: es-ES
-#   weight: 6
-
-# ru:
-#   locale: ru-RU
-#   weight: 7
