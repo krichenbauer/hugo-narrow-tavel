@@ -7,11 +7,17 @@
   var dataUrl = window.travelMapDataUrl || "/map/index.json";
   var map = L.map(mapEl, {
     scrollWheelZoom: true,
+    zoomControl: false,
   }).setView([43.0618, 141.3545], 12);
+
+  L.control.zoom({
+    zoomInTitle: "Hineinzoomen",
+    zoomOutTitle: "Herauszoomen",
+  }).addTo(map);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>-Mitwirkende',
   }).addTo(map);
 
   fetch(dataUrl)
@@ -29,9 +35,9 @@
         }
 
         var summary = item.summary ? "<p>" + item.summary + "</p>" : "";
-        var district = item.district ? "<p><strong>District:</strong> " + item.district + "</p>" : "";
+        var district = item.district ? "<p><strong>Stadtteil:</strong> " + item.district + "</p>" : "";
         var categories = Array.isArray(item.categories) && item.categories.length
-          ? "<p><strong>Categories:</strong> " + item.categories.join(", ") + "</p>"
+          ? "<p><strong>Kategorien:</strong> " + item.categories.join(", ") + "</p>"
           : "";
         var thumb = item.thumbnail
           ? '<img src="' + item.thumbnail + '" alt="' + item.title + '" loading="lazy" decoding="async">'
@@ -44,7 +50,7 @@
           summary,
           categories,
           district,
-          '<p><a href="' + item.permalink + '">Open place page</a></p>',
+          '<p><a href="' + item.permalink + '">Ort ansehen</a></p>',
           "</article>",
         ].join("");
 

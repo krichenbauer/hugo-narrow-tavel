@@ -17,8 +17,8 @@
 {{- end -}}
 
 {{- if gt (len $gallery) 0 -}}
-<section class="travel-gallery mt-8" aria-label="Image gallery">
-  <h2 class="mb-3 text-xl font-semibold">Gallery</h2>
+<section class="travel-gallery mt-8" aria-label="Bildergalerie">
+  <h2 class="mb-3 text-xl font-semibold">Galerie</h2>
   <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
     {{ range $idx, $img := $gallery }}
       {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $img.MediaType.SubType }}

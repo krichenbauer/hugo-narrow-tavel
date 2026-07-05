@@ -1,10 +1,10 @@
 {{- $page := .page -}}
 {{- $coords := $page.Params.coordinates -}}
 <section class="travel-meta rounded-xl border border-neutral-200 bg-white/70 p-4">
-  <h2 class="mb-3 text-lg font-semibold">Practical Info</h2>
+  <h2 class="mb-3 text-lg font-semibold">Praktische Infos</h2>
 
   {{ with $page.GetTerms "categories" }}
-    <div class="mb-3 flex flex-wrap gap-2" aria-label="Categories">
+    <div class="mb-3 flex flex-wrap gap-2" aria-label="Kategorien">
       {{ range . }}
         <a class="travel-badge" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       {{ end }}
@@ -14,28 +14,28 @@
   <dl class="grid gap-2 text-sm">
     {{ with $page.Params.district }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
-        <dt class="font-medium text-neutral-700">District</dt>
+        <dt class="font-medium text-neutral-700">Stadtteil</dt>
         <dd>{{ . }}</dd>
       </div>
     {{ end }}
 
     {{ with $page.Params.address }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
-        <dt class="font-medium text-neutral-700">Address</dt>
+        <dt class="font-medium text-neutral-700">Adresse</dt>
         <dd>{{ . }}</dd>
       </div>
     {{ end }}
 
     {{ with $page.Params.opening_hours }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
-        <dt class="font-medium text-neutral-700">Opening Hours</dt>
+        <dt class="font-medium text-neutral-700">Oeffnungszeiten</dt>
         <dd>{{ . }}</dd>
       </div>
     {{ end }}
 
     {{ with $page.Params.website }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
-        <dt class="font-medium text-neutral-700">Website</dt>
+        <dt class="font-medium text-neutral-700">Webseite</dt>
         <dd><a class="travel-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a></dd>
       </div>
     {{ end }}
@@ -43,7 +43,7 @@
     {{ with $coords }}
       {{ with and .latitude .longitude }}
         <div class="grid grid-cols-[8rem_1fr] gap-2">
-          <dt class="font-medium text-neutral-700">Coordinates</dt>
+          <dt class="font-medium text-neutral-700">Koordinaten</dt>
           <dd>{{ $coords.latitude }}, {{ $coords.longitude }}</dd>
         </div>
         <div class="mt-2">
@@ -53,7 +53,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Open in OpenStreetMap
+            In OpenStreetMap oeffnen
           </a>
         </div>
       {{ end }}

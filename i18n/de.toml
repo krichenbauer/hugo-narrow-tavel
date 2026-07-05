@@ -51,7 +51,7 @@
     toc           = "Inhaltsverzeichnis"
 
     searchClear        = "Löschen"
-    searchPlaceholder  = "Beiträge durchsuchen..."
+    searchPlaceholder  = "Inhalte durchsuchen..."
     searchClose        = "Schließen"
     searchEmpty        = "Suche starten"
     searchLoading      = "Suche..."

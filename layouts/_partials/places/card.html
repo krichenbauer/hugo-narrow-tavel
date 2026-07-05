@@ -39,7 +39,7 @@
         />
       {{ end }}
     {{ else }}
-      <div class="flex h-44 items-center justify-center rounded-t-xl bg-neutral-100 text-neutral-500">No image</div>
+      <div class="flex h-44 items-center justify-center rounded-t-xl bg-neutral-100 text-neutral-500">Kein Bild</div>
     {{ end }}
 
     <div class="space-y-3 p-4">
@@ -50,7 +50,7 @@
       {{ end }}
 
       {{ with $page.GetTerms "categories" }}
-        <div class="flex flex-wrap gap-2" aria-label="Categories">
+        <div class="flex flex-wrap gap-2" aria-label="Kategorien">
           {{ range . }}
             <span class="travel-badge">{{ .LinkTitle }}</span>
           {{ end }}
@@ -58,7 +58,7 @@
       {{ end }}
 
       {{ with $page.Params.district }}
-        <p class="text-sm text-neutral-700"><strong>District:</strong> {{ . }}</p>
+        <p class="text-sm text-neutral-700"><strong>Stadtteil:</strong> {{ . }}</p>
       {{ end }}
     </div>
   </a>
