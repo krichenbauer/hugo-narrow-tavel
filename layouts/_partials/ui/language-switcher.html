@@ -9,7 +9,6 @@
       {{- $translationURLs = merge $translationURLs (dict .Language.Lang .RelPermalink) -}}
     {{- end -}}
   {{- end -}}
-  {{/* 点击切换模式 */}}
   {{- if eq $languageSwitchMode "cycle" -}}
     {{- $currentIndex := 0 -}}
     {{- range $index, $site := $sites -}}
@@ -37,14 +36,12 @@
       </a>
     </div>
   {{- else -}}
-    {{- /* 下拉菜单模式 */ -}}
     {{- $languageMenuContent := "" -}}
     {{- range $site := $sites -}}
       {{- $lang := $site.Language.Lang -}}
       {{- $langName := $site.Language.Label | default $lang -}}
       {{- $isCurrent := eq $lang $currentLang -}}
 
-      {{- /* 获取当前页面在目标语言下的URL */ -}}
       {{- $targetURL := $site.Home.RelPermalink -}}
       {{- with index $translationURLs $lang -}}
         {{- $targetURL = . -}}
@@ -53,7 +50,6 @@
       {{- $languageMenuContent = printf "%s<a href=\"%s\" class=\"text-accent-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground flex w-full items-center rounded-md px-4 py-2 text-sm transition-all duration-200 ease-out focus:outline-none\" role=\"menuitem\"%s><span class=\"font-medium\">%s</span></a>" $languageMenuContent $targetURL (cond $isCurrent " aria-current=\"true\"" "") $langName -}}
     {{- end -}}
 
-    {{- /* 使用统一的下拉菜单组件 */ -}}
     {{- partial "ui/dropdown-button.html" (dict
       "type" "language"
       "icon" "language"

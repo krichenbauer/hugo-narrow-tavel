@@ -1,8 +1,5 @@
-{{/* 文章导航组件
 
-  显示上一篇和下一篇文章的导航链接
 
-  @context {page} . 当前文章页面对象
 */}}
 
 {{ $prev := .PrevInSection }}
@@ -11,7 +8,6 @@
 {{ if or $prev $next }}
   <nav class="post-navigation mb-12">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <!-- 上一篇文章 -->
       <div class="nav-item">
         {{ if $prev }}
           <a
@@ -54,7 +50,6 @@
         {{ end }}
       </div>
 
-      <!-- 下一篇文章 -->
       <div class="nav-item">
         {{ if $next }}
           <a

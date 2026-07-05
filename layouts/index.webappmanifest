@@ -1,4 +1,4 @@
-{{- /* 简洁的基础主题色 */ -}}
+{{- /* Minimal base theme color */ -}}
 {{- $themeColor := "#09090b" -}}
 
 {{- $manifest := dict
@@ -10,7 +10,7 @@
   "background_color" "#ffffff"
   "theme_color" $themeColor
   "orientation" "portrait-primary"
-  "lang" (site.Params.language | default site.Language.Locale | default "zh-CN")
+  "lang" (site.Params.language | default site.Language.Locale | default "en-US")
   "dir" "ltr"
   "scope" "/"
   "categories" (slice "blog" "technology" "education")

@@ -22,7 +22,6 @@ experience:
     title: "Job Title"
     location: "City, Country"
     start: "Jan 2022"
-    end: "Present"    # write any end label you like (e.g. "Present", "至今", "现在")
     description: ""   # optional paragraph below the title
     highlights:
       - "Achievement or responsibility 1"

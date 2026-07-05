@@ -1,5 +1,4 @@
 .prose {
-  /* 基础文本样式 */
   --tw-prose-body: var(--color-foreground);
   --tw-prose-headings: var(--color-foreground);
   --tw-prose-lead: var(--color-muted-foreground);
@@ -17,14 +16,12 @@
   --tw-prose-th-borders: var(--color-border);
   --tw-prose-td-borders: var(--color-border);
 
-  /* 字体和间距 */
   font-family: ui-sans-serif, system-ui, sans-serif;
   line-height: 1.7;
   font-size: 1rem;
   max-width: none;
 }
 
-/* 标题样式 */
 .prose h1 {
   @apply scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl;
   margin-top: 2rem;
@@ -98,7 +95,6 @@
   color: var(--tw-prose-headings);
 }
 
-/* 标题锚点链接 */
 .heading-anchor {
   display: inline-flex;
   align-items: center;
@@ -121,7 +117,6 @@
   color: var(--color-primary);
 }
 
-/* 段落和文本 */
 .prose p {
   @apply leading-7;
   margin-top: 1.25rem;
@@ -137,7 +132,6 @@
   margin-bottom: 0;
 }
 
-/* 引用块 */
 .prose blockquote {
   @apply border-l-4 pl-6 italic;
   border-left-color: var(--color-primary);
@@ -168,7 +162,6 @@
   color: var(--tw-prose-quotes);
 }
 
-/* 嵌套引用 */
 .prose blockquote blockquote {
   margin: 1rem 0;
   border-left-color: var(--color-accent);
@@ -179,7 +172,6 @@
   color: color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
-/* 脚注引用 */
 .prose .footnote-ref {
   color: var(--color-primary);
   text-decoration: none;
@@ -219,7 +211,6 @@
   transform: scale(1);
 }
 
-/* 脚注区域 */
 .prose .footnotes {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -235,7 +226,6 @@
   margin: 0.5rem 0;
 }
 
-/* 返回链接 */
 .prose .footnote-backref {
   color: var(--color-primary);
   text-decoration: none;
@@ -249,7 +239,6 @@
   vertical-align: baseline;
 }
 
-/* 返回链接悬浮背景 */
 .prose .footnote-backref::after {
   content: "";
   position: absolute;
@@ -274,7 +263,6 @@
   transform: scale(1);
 }
 
-/* 链接样式 */
 .prose p > a {
   color: var(--tw-prose-links);
   text-decoration: underline;

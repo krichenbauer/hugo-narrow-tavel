@@ -7,9 +7,9 @@
 {{- $category := .Get "category" -}}
 {{- $group := .Get "group" -}}
 
-{{- /* 所有情况都使用统一的容器 */ -}}
+{{- /* Use one shared container for all modes */ -}}
 <div class="link-card-group">
-  {{- /* 方式1: 直接传参 */ -}}
+  {{- /* Mode 1: direct parameters */ -}}
   {{- if and $title $url -}}
     {{ partial "content/link.html" (dict
       "title" $title
@@ -19,12 +19,12 @@
       )
     }}
 
-    {{- /* 方式2: 使用ID引用数据 */ -}}
+    {{- /* Mode 2: lookup by ID/reference */ -}}
   {{- else if or $id $ref -}}
     {{- $linkId := $id | default $ref -}}
     {{- $found := false -}}
 
-    {{- /* 检查数据文件是否存在 */ -}}
+    {{- /* Verify data source exists */ -}}
     {{- if site.Data.links -}}
       {{- range $catName, $linkList := site.Data.links -}}
         {{- if $linkList -}}
@@ -48,11 +48,11 @@
 
     {{- if not $found -}}
       <div class="link-card-error">
-        <p>⚠️ 未找到 ID 为 "{{ $linkId }}" 的链接</p>
+        <p>⚠️ Link with ID "{{ $linkId }}" was not found.</p>
       </div>
     {{- end -}}
 
-    {{- /* 方式3: 批量引用 */ -}}
+    {{- /* Mode 3: render a full category/group */ -}}
   {{- else if or $category $group -}}
     {{- $categoryName := $category | default $group -}}
     {{- $links := "" -}}
@@ -74,19 +74,19 @@
       {{- end -}}
     {{- else -}}
       <div class="link-card-error">
-        <p>⚠️ 未找到分类 "{{ $categoryName }}" 的链接</p>
+        <p>⚠️ No links found for category "{{ $categoryName }}".</p>
       </div>
     {{- end -}}
 
-    {{- /* 错误处理 */ -}}
+    {{- /* Validation errors */ -}}
   {{- else -}}
     <div class="link-card-error">
-      <p>⚠️ linkcard 短代码使用错误</p>
-      <p>请使用以下方式之一:</p>
+      <p>⚠️ Invalid linkcard shortcode usage.</p>
+      <p>Use one of the following modes:</p>
       <ul>
-        <li>直接传参: title 和 url 参数</li>
-        <li>引用数据: id 或 ref 参数</li>
-        <li>批量引用: category 或 group 参数</li>
+        <li>Direct parameters: title and url</li>
+        <li>Data lookup: id or ref</li>
+        <li>Bulk category render: category or group</li>
       </ul>
     </div>
   {{- end -}}

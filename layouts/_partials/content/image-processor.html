@@ -1,4 +1,3 @@
-{{/* 图片处理器 */}}
 
 {{- $context := .context -}}
 {{- $src := .src | string -}}
@@ -7,7 +6,6 @@
 {{- $enablePlaceholder := .enablePlaceholder | default true -}}
 {{- $outputType := .outputType | default "both" -}}
 
-{{/* 初始化核心变量 */}}
 {{- $resource := false -}}
 {{- $resourceType := "" -}}
 {{- $isExternal := false -}}
@@ -15,7 +13,6 @@
 {{- $searchPath := $src -}}
 {{- $isRootRelative := hasPrefix $src "/" -}}
 
-{{/* 检查是否为外部URL */}}
 {{- if or
   (hasPrefix $src "http://")
   (hasPrefix $src "https://")
@@ -26,14 +23,12 @@
   {{- $resourceType = "external" -}}
   {{- $finalUrl = $src -}}
 {{- else -}}
-  {{/* 统一路径格式，避免带前导 / 的 relURL 在子路径站点下失效 */}}
   {{- if hasPrefix $src "./" -}}
     {{- $searchPath = strings.TrimPrefix "./" $src -}}
   {{- else if hasPrefix $src "/" -}}
     {{- $searchPath = strings.TrimPrefix "/" $src -}}
   {{- end -}}
 
-  {{/* 根路径只查全局资源或静态文件；相对路径优先查页面资源 */}}
   {{- if not $isRootRelative -}}
     {{- with $context.Resources.GetMatch $searchPath -}}
       {{- $resource = . -}}
@@ -54,7 +49,6 @@
   {{- end -}}
 {{- end -}}
 
-{{/* 设置核心数据到上下文 */}}
 {{- if or (eq $outputType "data") (eq $outputType "both") -}}
   {{- $context.Scratch.Set "imageResource" $resource -}}
   {{- $context.Scratch.Set "imageUrl" $finalUrl -}}
@@ -62,7 +56,6 @@
   {{- $context.Scratch.Set "isExternal" $isExternal -}}
 {{- end -}}
 
-{{/* 生成图片HTML */}}
 {{- if or (eq $outputType "img") (eq $outputType "both") -}}
   <img
     src="{{ $finalUrl }}"

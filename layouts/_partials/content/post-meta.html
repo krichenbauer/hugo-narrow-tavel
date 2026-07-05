@@ -1,48 +1,36 @@
-{{/* 文章元信息组件
-
-显示文章标题、发布时间、阅读时间、分类法信息等
 
 
-@context {page} . 当前文章页面对象
+
 */}}
 
-{{/* 获取当前页面所属的 series */}}
 {{- $currentSeries := .GetTerms "series" }}
 {{- $title := .Title | strings.TrimSpace }}
 
 
 <div class="post-meta mb-8">
-  <!-- 文章标题 -->
   {{ with $title }}
     <h1 class="text-foreground mb-6 text-3xl leading-tight font-bold md:text-4xl">
       {{ . }}
     </h1>
   {{ end }}
 
-  <!-- 文章摘要 -->
   {{ if .Params.summary }}
   <div class="text-muted-foreground mb-6 text-lg leading-relaxed">
     {{ .Params.summary | plainify }}
   </div>
   {{ end }}
 
-  <!-- 元信息区域 -->
   <div class="bg-card border-border rounded-xl border">
 
-    {{/* 如果有 Series，使用 flex 左右分栏布局 */}}
     {{- if $currentSeries }}
     <div class="flex flex-col lg:flex-row">
 
-      {{/* 左侧：文章元信息 */}}
       <div class="shrink-0 lg:w-3/5 p-6 border-b lg:border-b-0 lg:border-r border-border">
         {{- else }}
-        {{/* 没有 Series 时，单栏显示 */}}
         <div class="p-6">
           {{- end }}
 
-          <!-- 发布时间和阅读时间 -->
           <div class="text-muted-foreground flex flex-wrap items-center gap-3 text-sm mb-4">
-            <!-- 发布时间 -->
             <div class="flex items-center gap-2">
               {{ partial "features/icon.html" (dict "name" "calendar" "size" "sm" "ariaLabel" "") }}
               <time datetime="{{ .Date.Format `2006-01-02` }}">
@@ -50,7 +38,6 @@
               </time>
             </div>
 
-            <!-- 阅读时间 -->
             {{ with .ReadingTime }}
             <div class="flex items-center gap-2">
               {{ partial "features/icon.html" (dict "name" "clock" "size" "sm" "ariaLabel" "")
@@ -59,7 +46,6 @@
             </div>
             {{ end }}
 
-            <!-- 字数统计 -->
             {{ with .WordCount }}
             <div class="flex items-center gap-2">
               {{ partial "features/icon.html" (dict "name" "text" "size" "sm" "ariaLabel" "") }}
@@ -68,7 +54,6 @@
             {{ end }}
           </div>
 
-          <!-- 分类法 -->
           {{- $taxonomies := .Site.Taxonomies }}
           {{- if $taxonomies }}
           <div class="text-muted-foreground space-y-3 pt-4 border-t border-border">
@@ -105,9 +90,7 @@
           {{- if $currentSeries }}
         </div>
 
-        {{/* 右侧：Series 文章列表 */}}
         <div class="flex-1 lg:w-2/5 flex flex-col" id="series-container">
-          <!-- Series 标题栏 (Tabs) -->
           <div class="shrink-0 p-4 border-b border-border">
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth" id="series-tabs">
               {{- range $dataIndex, $seriesPage := $currentSeries }}
@@ -132,7 +115,6 @@
               </button>
               {{- end }}
 
-              <!-- 跳转到分类页的按钮 (仅针对当前激活的 Series，通过 JS 更新 href) -->
               <a href="#" id="series-link-btn"
                 class="ml-auto shrink-0 p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-accent/50 transition-colors"
                 >
@@ -141,7 +123,6 @@
             </div>
           </div>
 
-          <!-- Series 内容列表区域 -->
           <div class="flex-1">
             {{- range $dataIndex, $seriesPage := $currentSeries }}
             {{- $seriesPages := $seriesPage.Pages.ByParam "series_order" }}
@@ -178,7 +159,6 @@
 
           <script>
             function switchSeries(index) {
-              // 1. 更新 Tabs 样式
               document.querySelectorAll('.series-tab-btn').forEach(btn => {
                 const isTarget = parseInt(btn.dataset.index) === index;
                 if (isTarget) {
@@ -190,7 +170,6 @@
                 }
               });
 
-              // 2. 切换内容显示
               document.querySelectorAll('.series-content').forEach(content => {
                 content.classList.add('hidden', 'opacity-0', 'z-0');
                 content.classList.remove('block', 'opacity-100', 'z-10');
@@ -201,7 +180,6 @@
                 targetContent.classList.remove('hidden', 'opacity-0', 'z-0');
                 targetContent.classList.add('block', 'opacity-100', 'z-10');
 
-                // 3. 更新跳转链接
                 const linkBtn = document.getElementById('series-link-btn');
                 if (linkBtn) {
                   linkBtn.href = targetContent.dataset.link;
@@ -209,7 +187,6 @@
               }
             }
 
-            // 初始化链接
             document.addEventListener('DOMContentLoaded', () => {
               const activeContent = document.querySelector('.series-content.block');
               if (activeContent) {

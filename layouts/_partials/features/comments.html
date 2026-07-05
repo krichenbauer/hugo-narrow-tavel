@@ -1,15 +1,5 @@
-{{/* 评论系统组件
 
-  支持多种评论系统：
-  - Giscus (基于 GitHub Discussions)
-  - Disqus (传统评论系统)
-  - Utterances (基于 GitHub Issues)
-  - Waline (简洁评论系统)
-  - Artalk (自托管评论系统)
-  - Twikoo (简洁评论系统)
-  - Comentario (自托管评论系统)
 
-  @context {page} . 当前文章页面对象
 */}}
 
 {{- $commentsConfig := dict
@@ -17,17 +7,14 @@
   "system" ""
 -}}
 
-{{/* 合并全局配置 */}}
 {{- with .Site.Params.comments -}}
   {{- $commentsConfig = merge $commentsConfig . -}}
 {{- end -}}
 
-{{/* 合并页面配置 */}}
 {{- with .Params.comments -}}
   {{- $commentsConfig = merge $commentsConfig . -}}
 {{- end -}}
 
-{{/* 判断是否加载评论 */}}
 {{- if and $commentsConfig.enabled $commentsConfig.system -}}
   {{- $commentSystem := $commentsConfig.system -}}
   <section
@@ -56,7 +43,6 @@
         {{- else if eq $commentSystem "comentario" -}}
           {{ partial "features/comments/comentario.html" (dict "Site" $.Site "Page" $ "id" "comentario-comments") }}
         {{- else -}}
-          {{- /* 不支持的评论系统 */ -}}
           {{ partial "features/comments/notice.html" (dict "icon" "alert-circle") }}
         {{- end -}}
       </div>

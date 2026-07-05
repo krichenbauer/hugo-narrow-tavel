@@ -1,9 +1,5 @@
-{{/* Utterances 评论系统组件
 
-  基于 GitHub Issues 的轻量级评论系统
 
-  @context {page} . 当前文章页面对象
-  @param {string} id 评论容器的唯一 ID
 */}}
 
 {{ $id := .id | default "utterances-comments" }}
@@ -22,31 +18,25 @@
     ></script>
   </div>
 
-  {{/* 主题切换支持 */}}
   <script>
     (function() {
       'use strict';
 
-      // 监听主题变化
       function updateUtterancesTheme() {
         const iframe = document.querySelector('#{{ $id }} .utterances-frame');
         if (!iframe) return;
 
-        // 获取当前主题
         const isDark = document.documentElement.classList.contains('dark');
         const theme = isDark ? 'github-dark' : 'github-light';
 
-        // 发送主题更新消息
         iframe.contentWindow.postMessage({
           type: 'set-theme',
           theme: theme
         }, 'https://utteranc.es');
       }
 
-      // 监听主题切换事件
       document.addEventListener('themeChanged', updateUtterancesTheme);
 
-      // 监听 DOM 变化（用于检测主题切换）
       const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
           if (mutation.type === 'attributes' && mutation.attributeName === 'class') {

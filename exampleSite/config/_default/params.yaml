@@ -145,11 +145,11 @@ comments:
     theme: "preferred-color-scheme"
   waline:
     serverURL: ""
-    lang: "zh-CN"
+    lang: "en-US"
   artalk:
     server: ""
     site: ""
-    locale: "zh-CN" # String|Object|"auto"
+    locale: "en-US" # String|Object|"auto"
     darkMode: "auto"
     gravatar:
       mirror: "https://cravatar.cn/avatar/"
@@ -157,10 +157,10 @@ comments:
     envId: ""
     region: "ap-shanghai"
     path: ""
-    lang: "zh-CN"
+    lang: "en-US"
   comentario:
     server: ""
-    lang: "zh-CN"
+    lang: "en-US"
     theme: "" # light, dark, or empty to follow browser preference
     domainId: ""
     cssOverride: ""
@@ -209,7 +209,7 @@ katex:
 mermaid:
   enabled: true
 
-# Gallery 配置
+# Gallery configuration
 gallery:
   enabled: true
   defaultLayout: justified # justified, masonry, grid
@@ -217,7 +217,7 @@ gallery:
   targetRowHeight: 200
   lastRowBehavior: center # left, center, right, fill, hide
   columnWidth: 200
-  columns: 4 # auto 或具体数字
+  columns: 4 # auto or explicit number
 
 # Lightbox
 lightbox:
@@ -243,13 +243,13 @@ readingProgress:
 # Accepted values:
 #   1) Hugo localization tokens (recommended): ":date_full" / ":date_long" / ":date_medium" / ":date_short"
 #      Automatically localized based on the current language's locale
-#      (e.g., en → "January 2, 2006", zh-Hans → "2006年1月2日").
+#      (e.g., en → "January 2, 2006", de → "2. Januar 2006").
 #      NOTE: ":date_medium" currently has an upstream bug under en-GB (month is omitted except September),
 #      so the theme uses ":date_long" for places that previously used medium.
 #   2) Go time layout string: reference time is "Mon Jan 2 15:04:05 MST 2006". Examples:
 #        "2006-01-02"           → 2024-05-01
 #        "January 2, 2006"      → May 1, 2024
-#        "2006年1月2日"         → 2024年5月1日
+#        "2006-01-02"           → 2024-05-01
 #        "Jan 2, 2006"          → May 1, 2024
 #        "02 Jan 2006"          → 01 May 2024
 # Usage (which variants the theme actually renders):

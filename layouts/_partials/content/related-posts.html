@@ -1,18 +1,13 @@
-{{/* 相关文章组件
 
-  显示与当前文章相关的其他文章
 
-  @context {page} . 当前文章页面对象
 */}}
 
-{{/* 获取配置参数 */}}
 {{ $relatedCount := .Params.relatedPostsCount | default .Site.Params.post.relatedPostsCount | default 3 }}
 {{ $showRelated := .Params.showRelated | default .Site.Params.post.showRelated | default true }}
 {{ $related := .Site.RegularPages.Related . | first $relatedCount }}
 
 {{ if and $showRelated $related }}
   <section class="related-posts mb-12">
-    <!-- 标题 -->
     <div class="mb-6 flex items-center gap-3">
       {{ partial "features/icon.html" (dict "name" "related" "size" "md" "ariaLabel" "") }}
       <h2 class="text-foreground text-2xl font-bold">
@@ -20,7 +15,6 @@
       </h2>
     </div>
 
-    <!-- 相关文章列表 -->
     <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {{ range $related }}
         <article class="group">

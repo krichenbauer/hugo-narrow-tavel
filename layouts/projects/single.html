@@ -1,9 +1,6 @@
 {{ define "main" }}
-  <!-- 页面头部区域: 图、标题、摘要 -->
   <header class="mb-10">
-    <!-- 项目封面图片 -->
     {{- if .Params.cover -}}
-      {{/* 使用通用图片处理器 */}}
       {{- partial "content/image-processor.html" (dict
         "context" .
         "src" .Params.cover
@@ -29,12 +26,10 @@
     {{ end }}
 
 
-    <!-- 标题 -->
     <h1 class="text-foreground mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">
       {{ .Title }}
     </h1>
 
-    <!-- 摘要 -->
     {{ if .Params.summary }}
       <div class="text-muted-foreground text-lg leading-relaxed md:text-xl">
         {{ .Params.summary | plainify }}
@@ -42,7 +37,6 @@
     {{ end }}
   </header>
 
-  <!-- 项目元信息按钮组 -->
   <div class="mb-12">
     <div class="flex flex-wrap items-center gap-2.5 text-sm font-medium">
       <span
@@ -110,14 +104,12 @@
     </div>
   </div>
 
-  <!-- 正文区域 (垂直布局最底部) -->
   <div class="bg-card border-border rounded-xl border p-6 shadow-sm md:p-8 md:px-10">
     <article class="prose prose-neutral dark:prose-invert max-w-none">
       {{ .Content }}
     </article>
   </div>
 
-  <!-- 评论组件 -->
   <div class="mt-12">
     {{ partial "features/comments.html" . }}
   </div>

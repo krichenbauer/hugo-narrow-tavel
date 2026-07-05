@@ -1,48 +1,45 @@
-<img src="https://cdn.jsdelivr.net/gh/tom2almighty/hugo-narrow@main/images/screenshot.png"/>
+# Hugo Narrow Tavel (Travel Guide Edition)
 
-# Hugo Narrow
+This theme is tailored for responsive travel-guide sites built with Hugo.
 
-A Modern Hugo Theme with Multiple Color Schemes - Built on TailwindCSS 4.
+It is intended for content models centered around places, routes, map overviews,
+and practical trip information, while keeping Markdown content portable for
+future exports (for example EPUB or PDF workflows).
 
-**[Documentation](https://tom2almighty.github.io/hugo-narrow-docs)** · **[Demo](https://tom2almighty.github.io/hugo-narrow)** · **[中文](README.zh-Hans.md)**
+## Base Theme Origin
 
-## ✨ Features
+This repository is based on the original Hugo Narrow theme:
 
-- Multiple Color Schemes
-- Custom Colors
-- Dark Mode
-- Table of Contents
-- Search Functionality
-- Comment Systems
-- Analytics Systems
-- Enhanced Markdown
-- Enhanced Code Blocks
-- Multilingual Support
-- Katex Support
-- Mermaid Support
-- Lightbox
-- Justified/Masonry/Grid Gallery with markdown
+- Upstream project: https://github.com/tom2almighty/hugo-narrow
+- Upstream documentation: https://tom2almighty.github.io/hugo-narrow-docs
 
-## 📄 License
+The current variant extends that base toward travel-guide use cases.
+
+## Travel-Guide Focus
+
+- Place-oriented content structure with page bundles
+- Card-based list views for places and taxonomies
+- Metadata blocks for district, address, opening hours, and links
+- Hero image and bundle gallery support
+- Map overview via Leaflet with OpenStreetMap attribution
+- Responsive layout and keyboard-accessible interactions
+- Portable Markdown-first authoring approach
+
+## Development
+
+Run the local example site:
+
+```bash
+hugo server --source exampleSite
+```
+
+Format theme templates and assets (if pnpm is installed):
+
+```bash
+pnpm install
+pnpm run format:write
+```
+
+## License
 
 This project is open source under the [MIT License](LICENSE).
-
-## 🙏 Acknowledgments
-
-- [Hugo](https://gohugo.io/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [KaTeX](https://katex.org/)
-- [Mermaid](https://mermaid.js.org/)
-- [Daisyui](https://daisyui.com/)
-- [Tweakcn](https://tweakcn.com/)
-- [Hexo Theme icarus](https://github.com/ppoffice/hexo-theme-icarus)
-- [Hugo Theme Stack](https://stack.jimmycai.com/)
-- [Vercel](https://vercel.com)
-- [iconify](https://iconify.design/)
-- [Awesome-Merge-Picture](https://github.com/XiCheng148/Awesome-Merge-Picture)
-
----
-
-## ⭐ Star History
-
-[![Star History Chart](https://api.star-history.com/image?repos=tom2almighty/hugo-narrow&type=timeline&legend=top-left)](https://www.star-history.com/?repos=tom2almighty%2Fhugo-narrow&type=timeline&legend=top-left)

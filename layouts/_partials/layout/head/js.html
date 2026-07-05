@@ -21,7 +21,6 @@
 {{- end }}
 
 
-<!-- 目录功能脚本 - 只在文章页面 TOC 启用时加载，需要在 dock.js 之前加载 -->
 {{- if .IsPage }}
   {{- $tocConfig := partial "config/toc.html" . }}
   {{- if $tocConfig.enabled }}
@@ -50,7 +49,6 @@
 {{- end }}
 
 
-<!-- 搜索功能脚本 -->
 {{- with resources.Get "js/search.js" }}
   {{- $opts := dict
     "minify" (not hugo.IsDevelopment)
@@ -74,7 +72,6 @@
 {{- end }}
 
 
-<!-- Dock 控制脚本 -->
 {{- with resources.Get "js/dock.js" }}
   {{- $opts := dict
     "minify" (not hugo.IsDevelopment)
@@ -127,7 +124,6 @@
 {{ end }}
 
 
-<!-- 自定义 JS 文件 -->
 {{- $customJsFiles := resources.Match "js/custom/*.js" }}
 {{- range $customJsFiles }}
   {{- $fileName := .Name }}

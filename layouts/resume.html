@@ -3,7 +3,6 @@
 
 
   <article class="py-6">
-    <!-- 页眉：姓名、职位、联系方式 -->
     <header class="mb-8">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
@@ -13,7 +12,6 @@
           {{ with $p.jobtitle }}
             <p class="text-primary mb-3 text-lg font-medium">{{ . }}</p>
           {{ end }}
-          <!-- 联系方式 -->
           <div class="text-muted-foreground flex flex-wrap gap-x-4 gap-y-1 text-sm">
             {{ with $p.location }}
               <span class="flex items-center gap-1">
@@ -77,7 +75,6 @@
       </div>
     </header>
 
-    <!-- 概要 -->
     {{ with $p.summary }}
       <section class="mb-8">
         <div class="bg-card border-border rounded-lg border p-6 shadow-sm">
@@ -87,7 +84,6 @@
     {{ end }}
 
 
-    <!-- 工作经历 -->
     {{ with $p.experience }}
       <section class="mb-8">
         <h2 class="text-foreground mb-4 flex items-center gap-2 text-xl font-bold">
@@ -106,7 +102,6 @@
                   {{ end }}
                 </div>
                 <div class="text-muted-foreground shrink-0 text-sm">
-                  {{ .start }} –
                   {{ .end }}
                 </div>
               </div>
@@ -117,7 +112,6 @@
                 <ul class="space-y-1">
                   {{ range . }}
                     <li class="text-muted-foreground flex items-baseline gap-2 text-sm">
-                      <span class="text-primary shrink-0">▸</span>
                       {{ . }}
                     </li>
                   {{ end }}
@@ -140,7 +134,6 @@
     {{ end }}
 
 
-    <!-- 教育经历 -->
     {{ with $p.education }}
       <section class="mb-8">
         <h2 class="text-foreground mb-4 flex items-center gap-2 text-xl font-bold">
@@ -162,7 +155,6 @@
                   {{ end }}
                 </div>
                 <div class="text-muted-foreground shrink-0 text-sm">
-                  {{ .start }} –
                   {{ .end }}
                 </div>
               </div>
@@ -173,7 +165,6 @@
     {{ end }}
 
 
-    <!-- 技能 -->
     {{ with $p.skills }}
       <section class="mb-8">
         <h2 class="text-foreground mb-4 flex items-center gap-2 text-xl font-bold">
@@ -203,12 +194,10 @@
     {{ end }}
 
 
-    <!-- 证书与语言能力（两列布局） -->
     {{ $hasCerts := $p.certifications }}
     {{ $hasLangs := $p.languages }}
     {{ if or $hasCerts $hasLangs }}
       <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <!-- 证书 -->
         {{ with $hasCerts }}
           <section class="flex flex-col">
             <h2 class="text-foreground mb-4 flex items-center gap-2 text-xl font-bold">
@@ -233,7 +222,6 @@
                     <p class="text-muted-foreground text-sm">
                       {{ .issuer }}
                       {{ with .date }}
-                        ·
                         {{ . }}
                       {{ end }}
                     </p>
@@ -245,7 +233,6 @@
         {{ end }}
 
 
-        <!-- 语言能力 -->
         {{ with $hasLangs }}
           <section class="flex flex-col">
             <h2 class="text-foreground mb-4 flex items-center gap-2 text-xl font-bold">
@@ -269,7 +256,6 @@
     {{ end }}
 
 
-    <!-- 页面正文（可选额外 Markdown 内容） -->
     {{ with .Content }}
       <div class="prose prose-neutral dark:prose-invert max-w-none">
         {{ . }}

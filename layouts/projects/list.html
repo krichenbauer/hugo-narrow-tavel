@@ -1,6 +1,5 @@
 {{ define "main" }}
   <div class="mx-auto max-w-6xl">
-    <!-- 页面标题和描述 -->
     <header class="mb-8">
       <h1 class="text-foreground mb-4 text-3xl font-bold">
         {{ .Title }}
@@ -17,7 +16,6 @@
       {{ end }}
 
 
-      <!-- 项目统计 -->
       {{ $totalProjects := len (where .Site.RegularPages "Section" "projects") }}
       {{ if gt $totalProjects 0 }}
         <div class="text-muted-foreground text-sm">
@@ -26,7 +24,6 @@
       {{ end }}
     </header>
 
-    <!-- 项目网格 -->
     {{ $projects := .Paginator.Pages }}
     {{ if $projects }}
       <div class="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -35,10 +32,8 @@
         {{ end }}
       </div>
 
-      <!-- 分页 -->
       {{ partial "navigation/pagination.html" . }}
     {{ else }}
-      <!-- 空状态 -->
       <div class="py-16 text-center">
         <div
           class="bg-muted/50 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full"

@@ -1,24 +1,20 @@
-{{/* 特色项目区域 - 首页展示 */}}
 
 {{ $featuredProjects := where (where .Site.RegularPages "Section" "projects") "Params.featured" true }}
 
 {{ if $featuredProjects }}
   <section class="mb-6">
-    <!-- 标题 -->
     <div class="mb-6">
       <h2 class="text-foreground text-2xl font-bold">
         {{ T "home.featuredProjects" }}
       </h2>
     </div>
 
-    <!-- 项目网格 - 响应式布局 -->
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {{ range first 3 $featuredProjects }}
         {{ partial "content/project-card.html" (dict "page" .) }}
       {{ end }}
     </div>
 
-    <!-- 查看所有项目按钮 -->
     {{ $projectsCount := len (where .Site.RegularPages "Section" "projects") }}
     {{ if gt $projectsCount (len $featuredProjects) }}
       <div class="mt-8 mb-6 text-center">

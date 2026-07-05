@@ -1,8 +1,5 @@
-{{/* 分页导航组件
 
-  显示分页导航，支持上一页、下一页、页码跳转
 
-  @context {page} . 当前页面对象 (包含分页信息)
 */}}
 
 {{ $paginator := .Paginator }}
@@ -13,7 +10,6 @@
     aria-label="{{ T `nav.pageInfo` (dict `current` $paginator.PageNumber `total` $paginator.TotalPages) }}"
   >
     <div class="flex items-center justify-center gap-2">
-      <!-- 上一页 -->
       {{ if $paginator.HasPrev }}
         <a
           href="{{ $paginator.Prev.URL | relLangURL }}"
@@ -33,13 +29,11 @@
       {{ end }}
 
 
-      <!-- 页码 -->
       <div class="flex items-center gap-1">
         {{ $currentPage := $paginator.PageNumber }}
         {{ $totalPages := $paginator.TotalPages }}
 
 
-        <!-- 第一页 -->
         {{ if gt $currentPage 3 }}
           <a
             href="{{ $paginator.First.URL }}"
@@ -48,17 +42,14 @@
             1
           </a>
           {{ if gt $currentPage 4 }}
-            <span class="text-muted-foreground px-2">…</span>
           {{ end }}
         {{ end }}
 
 
-        <!-- 当前页附近的页码 -->
         {{ range $paginator.Pagers }}
           {{ $pageNum := .PageNumber }}
           {{ if and (ge $pageNum (sub $currentPage 2)) (le $pageNum (add $currentPage 2)) }}
             {{ if eq $pageNum $currentPage }}
-              <!-- 当前页 -->
               <span
                 class="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-lg font-medium"
                 aria-current="page"
@@ -66,7 +57,6 @@
                 {{ $pageNum }}
               </span>
             {{ else }}
-              <!-- 其他页 -->
               <a
                 href="{{ .URL | relLangURL }}"
                 class="border-border hover:bg-accent/50 hover:border-primary/20 flex h-10 w-10 items-center justify-center rounded-lg border font-medium transition-all duration-300"
@@ -78,10 +68,8 @@
         {{ end }}
 
 
-        <!-- 最后一页 -->
         {{ if lt $currentPage (sub $totalPages 2) }}
           {{ if lt $currentPage (sub $totalPages 3) }}
-            <span class="text-muted-foreground px-2">…</span>
           {{ end }}
           <a
             href="{{ $paginator.Last.URL }}"
@@ -92,7 +80,6 @@
         {{ end }}
       </div>
 
-      <!-- 下一页 -->
       {{ if $paginator.HasNext }}
         <a
           href="{{ $paginator.Next.URL | relLangURL }}"

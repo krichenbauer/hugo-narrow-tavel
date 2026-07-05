@@ -103,14 +103,14 @@ output** rendered by `layouts/index.json`; client-side search lives in `assets/j
 
 ### i18n & multilingual
 
-UI strings live in `i18n/*.toml` (13 languages); use `{{ i18n "key" }}` in templates, never hardcode
-display text. Content is multilingual via `.<lang>.md` filename suffixes (e.g. `index.zh-hans.md`).
-`exampleSite` ships `en` + `zh-hans`; `defaultContentLanguageInSubdir: false`.
+UI strings live in `i18n/*.toml`; use `{{ i18n "key" }}` in templates, never hardcode
+display text. Content is multilingual via `.<lang>.md` filename suffixes (e.g. `index.de.md`).
+`exampleSite` currently ships English defaults; `defaultContentLanguageInSubdir: false`.
 
 ## Conventions
 
 - HTML/templates are formatted by Prettier with `prettier-plugin-go-template` and
   `prettier-plugin-tailwindcss` (2-space indent, double quotes, 100 col). Run `pnpm run format:write`.
-- Many template/JS comments are in Chinese — match the surrounding language when editing a file.
+- Keep template/JS comments in English for consistency.
 - `data-theme` color values are **oklch**; keep new themes in the same color space and define both
   the base and `.dark` variants.

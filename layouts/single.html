@@ -4,7 +4,6 @@
     {{- $showDate := not .Date.IsZero -}}
 
 
-    <!-- 页面头部 -->
     {{ if or $title $showDate }}
       <header class="mb-8">
         {{ with $title }}
@@ -25,12 +24,10 @@
     {{ end }}
 
 
-    <!-- 页面内容 -->
     <div class="prose prose-neutral dark:prose-invert mb-12 max-w-none">
       {{ .Content }}
     </div>
 
-    <!-- 评论组件 -->
     {{ partial "features/comments.html" . }}
   </article>
 {{ end }}

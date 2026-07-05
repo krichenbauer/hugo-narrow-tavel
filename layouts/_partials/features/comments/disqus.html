@@ -1,9 +1,5 @@
-{{/* Disqus 评论系统组件
 
-  传统的评论系统，支持多种功能
 
-  @context {page} . 当前文章页面对象
-  @param {string} id 评论容器的唯一 ID
 */}}
 
 {{ $id := .id | default "disqus-comments" }}
@@ -17,14 +13,12 @@
       (function() {
         'use strict';
 
-        // Disqus 配置
         var disqus_config = function () {
           this.page.url = '{{ .Permalink }}';
           this.page.identifier = '{{ .RelPermalink }}';
           this.page.title = '{{ .Title | safeJS }}';
         };
 
-        // 加载 Disqus
         function loadDisqus() {
           var d = document, s = d.createElement('script');
           s.src = 'https://{{ $config.shortname }}.disqus.com/embed.js';
@@ -32,7 +26,6 @@
           (d.head || d.body).appendChild(s);
         }
 
-        // 立即加载或延迟加载
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', loadDisqus);
         } else {

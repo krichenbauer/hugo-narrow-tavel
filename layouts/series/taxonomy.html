@@ -1,5 +1,4 @@
 {{ define "main" }}
-  <!-- 页面标题和描述 -->
   <header class="mb-8">
     <h1 class="text-foreground mb-4 text-3xl font-bold">{{ .Title }}</h1>
 
@@ -10,7 +9,6 @@
     {{ end }}
 
 
-    <!-- 统计信息 -->
     <div class="text-muted-foreground flex items-center gap-4 text-sm">
       <div class="flex items-center gap-1">
         {{ partial "features/icon.html" (dict "name" "series" "size" "sm" "ariaLabel" "") }}
@@ -19,7 +17,6 @@
     </div>
   </header>
 
-  <!-- 系列卡片列表 -->
   {{ $terms := .Data.Terms.ByCount }}
   {{ if $terms }}
     <div class="space-y-4">
@@ -27,7 +24,6 @@
         {{ $termPage := .Page }}
         {{ $count := .Count }}
 
-        {{/* 封面图：优先用系列 _index.md 的 cover，否则取第一篇有封面的文章 */}}
         {{- $coverImage := "" -}}
         {{- if $termPage.Params.cover -}}
           {{- partial "content/image-processor.html" (dict
@@ -53,7 +49,6 @@
           {{- end -}}
         {{- end -}}
 
-        {{/* 描述：优先 _index.md description，否则 summary */}}
         {{- $description := "" -}}
         {{- if $termPage.Description -}}
           {{- $description = $termPage.Description -}}
@@ -112,7 +107,6 @@
       {{ end }}
     </div>
   {{ else }}
-    <!-- 空状态 -->
     <div class="py-16 text-center">
       <div class="bg-muted/50 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full">
         {{ partial "features/icon.html" (dict "name" "series" "size" "xl" "ariaLabel" "") }}

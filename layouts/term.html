@@ -1,5 +1,4 @@
 {{ define "main" }}
-  <!-- 页面标题和描述 -->
   <header class="mb-8">
     <div class="mb-4 flex items-center gap-3">
       {{ if eq .Data.Singular "tag" }}
@@ -21,7 +20,6 @@
     {{ end }}
 
 
-    <!-- 统计信息 -->
     <div class="text-muted-foreground flex items-center gap-4 text-sm">
       <div class="flex items-center gap-1">
         {{ partial "features/icon.html" (dict "name" "file-text" "size" "sm" "ariaLabel" "") }}
@@ -30,12 +28,10 @@
     </div>
   </header>
 
-  <!-- 文章列表 -->
   {{ $posts := .Pages }}
   {{ if $posts }}
     {{ partial "content/post-list.html" (dict "posts" $posts) }}
   {{ else }}
-    <!-- 空状态 -->
     <div class="py-16 text-center">
       <div class="bg-muted/50 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full">
         {{ partial "features/icon.html" (dict "name" "file-text" "size" "xl" "ariaLabel" "") }}

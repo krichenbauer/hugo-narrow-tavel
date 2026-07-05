@@ -1,5 +1,3 @@
-{{/* 作者信息区域 */}}
-{{/* 优先使用页面配置，否则回退站点配置 */}}
 {{ $author := .Params.author | default site.Params.author }}
 {{ $avatarSrc := strings.TrimPrefix "/" ($author.avatar | default "") }}
 
@@ -9,7 +7,6 @@
       <div
         class="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:text-left"
       >
-        <!-- 头像 -->
         <div class="shrink-0">
           {{ if $author.avatar }}
             <img
@@ -18,7 +15,6 @@
               class="border-primary/20 h-24 w-24 rounded-full border-4 object-cover shadow-lg"
             />
           {{ else }}
-            <!-- 默认头像：使用作者姓名首字母 -->
             <div
               class="bg-primary text-primary-foreground flex h-24 w-24 items-center justify-center rounded-full text-2xl font-bold shadow-lg"
             >
@@ -27,7 +23,6 @@
           {{ end }}
         </div>
 
-        <!-- 作者信息 -->
         <div class="min-w-0 flex-1">
           <h1 class="text-foreground mb-2 text-3xl font-bold">
             {{ $author.name | default site.Title }}
@@ -46,7 +41,6 @@
           {{ end }}
 
 
-          <!-- 社交链接 -->
           {{ if $author.social }}
             <div class="flex flex-wrap justify-center gap-3 md:justify-start">
               {{ range $author.social }}

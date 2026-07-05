@@ -5,7 +5,6 @@
     >
       {{ range $index, $ancestor := .Ancestors.Reverse }}
         {{ if eq $index 0 }}
-          <!-- 首页链接 -->
           <li class="shrink-0">
             <a
               href="{{ $ancestor.RelPermalink }}"
@@ -16,7 +15,6 @@
             </a>
           </li>
         {{ else }}
-          <!-- 中间层级 -->
           <li class="flex min-w-0 items-center gap-1 md:gap-2">
             <span class="text-muted-foreground/50 shrink-0"
               >{{ partial "features/icon.html" (dict "name" "chevron-right" "size" "sm" "ariaLabel" "") }}
@@ -33,7 +31,6 @@
       {{ end }}
 
 
-      <!-- 当前页面 -->
       <li class="flex min-w-0 items-center gap-1 md:gap-2">
         <span class="text-muted-foreground/50 shrink-0"
           >{{ partial "features/icon.html" (dict "name" "chevron-right" "size" "sm" "ariaLabel" "") }}

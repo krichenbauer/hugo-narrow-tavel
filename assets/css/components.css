@@ -5,7 +5,6 @@
   overflow-y: auto;
 }
 
-/* 导航子菜单 */
 .nav-submenu {
   min-width: 10rem;
 }
@@ -47,23 +46,19 @@
   }
 }
 
-/* 悬浮模式下的 Dock 样式 */
 #dock[data-dock-mode="float"] {
   transition: all 0.2s ease-out;
 }
 
-/* 当dock显示时，调整阴影遮罩 */
 #dock[data-dock-mode="float"].translate-y-0 ~ #dock-float-trigger .bg-gradient-to-t {
   height: 12px;
 }
 
-/* 当dock显示时，图标旋转 */
 #dock[data-dock-mode="float"].translate-y-0 ~ #dock-float-trigger #dock-float-icon {
   transform: rotate(180deg);
   transition: transform 0.2s ease-out;
 }
 
-/* 响应式优化 */
 @media (max-width: 640px) {
   #dock[data-dock-mode="float"] {
     left: 1rem;

@@ -1,5 +1,4 @@
 {{ define "main" }}
-  <!-- 页面标题和描述 -->
   <header class="mb-8">
     <h1 class="text-foreground mb-4 text-3xl font-bold">
       {{ .Title }}
@@ -16,7 +15,6 @@
     {{ end }}
 
 
-    <!-- 统计信息 -->
     <div class="text-muted-foreground flex items-center gap-4 text-sm">
       <div class="flex items-center gap-1">
         {{ partial "features/icon.html" (dict "name" "tag" "size" "sm" "ariaLabel" "") }}
@@ -27,10 +25,8 @@
     </div>
   </header>
 
-  <!-- 分类法术语列表 -->
   {{ $terms := .Data.Terms.ByCount }}
   {{ if $terms }}
-    <!-- 统一使用标签云布局 -->
     {{ $taxonomySingular := .Data.Singular }}
     <div class="flex flex-wrap gap-3">
       {{ $maxCount := 0 }}
@@ -76,7 +72,6 @@
       {{ end }}
     </div>
   {{ else }}
-    <!-- 空状态 -->
     <div class="py-16 text-center">
       <div class="bg-muted/50 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full">
         {{ partial "features/icon.html" (dict "name" "tag" "size" "xl" "ariaLabel" "") }}

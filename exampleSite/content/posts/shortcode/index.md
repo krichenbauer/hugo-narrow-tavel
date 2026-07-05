@@ -95,12 +95,9 @@ Display a link card with a website icon:
 Embed Bilibili videos:
 
 ```markdown
-{{</* bilibili BV号 */>}}
-{{</* bilibili AV号 分P号 */>}}
 ```
 
 ### Tencent Video
 
 ```markdown
-{{</* tencent 视频ID */>}}
 ```

@@ -1,12 +1,10 @@
 
 /* Github light */
 :root:not(.dark) {
-  /* 关键字 - 红色系 */
   --chroma-k: #cf222e;
   --chroma-kc: #0550ae;
   --chroma-kp: #0550ae;
 
-  /* 名称 - 蓝色/紫色系 */
   --chroma-n: inherit;
   --chroma-na: #1f2328;
   --chroma-nc: #1f2328;
@@ -21,25 +19,20 @@
   --chroma-nv: #953800;
   --chroma-nf: #6639ba;
 
-  /* 字面量 - 蓝色系 */
   --chroma-s: #0a3069;
   --chroma-ss: #032f62;
   --chroma-m: #0550ae;
 
-  /* 操作符和标点 */
   --chroma-o: #0550ae;
   --chroma-p: #1f2328;
 
-  /* 注释 - 灰色 */
   --chroma-c: #57606a;
 
-  /* 错误和高亮 */
   --chroma-err: #f6f8fa;
   --chroma-err-bg: #82071e;
   --chroma-hl: #e5e5e5;
   --chroma-ln: #7f7f7f;
 
-  /* 差异显示 */
   --chroma-gd: #82071e;
   --chroma-gd-bg: #ffebe9;
   --chroma-gi: #116329;
@@ -49,12 +42,10 @@
 
 /* GitHub Dark */
 .dark {
-  /* 关键字 - 红色/橙色系 */
   --chroma-k: #ff7b72;
   --chroma-kc: #79c0ff;
   --chroma-kp: #79c0ff;
 
-  /* 名称 - 蓝色/紫色/橙色系 */
   --chroma-n: inherit;
   --chroma-nc: #f0883e;
   --chroma-no: #79c0ff;
@@ -71,7 +62,6 @@
   --chroma-nv: #79c0ff;
   --chroma-nf: #d2a8ff;
 
-  /* 字面量 - 蓝色系 */
   --chroma-l: #a5d6ff;
   --chroma-ld: #79c0ff;
   --chroma-s: #a5d6ff;
@@ -83,20 +73,16 @@
   --chroma-ss: #a5d6ff;
   --chroma-m: #a5d6ff;
 
-  /* 操作符和标点 */
   --chroma-o: #ff7b72;
   --chroma-p: inherit;
 
-  /* 注释 - 灰色 */
   --chroma-c: #8b949e;
   --chroma-cs: #8b949e;
 
-  /* 错误和高亮 */
   --chroma-err: #f85149;
   --chroma-hl: #6e7681;
   --chroma-ln: #6e7681;
 
-  /* 差异显示 */
   --chroma-gd: #ffa198;
   --chroma-gd-bg: #490202;
   --chroma-gh: #79c0ff;
@@ -109,7 +95,6 @@
   --chroma-w: #6e7681;
 }
 
-/* Chroma 样式应用 */
 .chroma { 
   color: var(--chroma-color, inherit);
 }
@@ -155,7 +140,6 @@
   display: flex; 
 }
 
-/* 关键字 */
 .chroma .k, .chroma .kc, .chroma .kd, .chroma .kn, .chroma .kr, .chroma .kt { 
   color: var(--chroma-k); 
 }
@@ -164,7 +148,6 @@
   color: var(--chroma-kp, var(--chroma-k)); 
 }
 
-/* 名称 */
 .chroma .n { 
   color: var(--chroma-n); 
 }
@@ -235,7 +218,6 @@
   font-weight: bold; 
 }
 
-/* 字面量 */
 .chroma .l { 
   color: var(--chroma-l, inherit); 
 }
@@ -260,18 +242,15 @@
   color: var(--chroma-m); 
 }
 
-/* 操作符 */
 .chroma .o, .chroma .ow { 
   color: var(--chroma-o); 
   font-weight: bold; 
 }
 
-/* 标点 */
 .chroma .p { 
   color: var(--chroma-p, inherit); 
 }
 
-/* 注释 */
 .chroma .c, .chroma .ch, .chroma .cm, .chroma .c1 { 
   color: var(--chroma-c); 
   font-style: italic; 
@@ -283,7 +262,6 @@
   font-style: italic; 
 }
 
-/* 通用 */
 .chroma .gd { 
   color: var(--chroma-gd); 
   background-color: var(--chroma-gd-bg, transparent); 

@@ -1,6 +1,5 @@
 {{ define "main" }}
   <div class="mx-auto px-4 py-6">
-    <!-- 页面标题和描述 -->
     <header class="mb-8">
       <h1 class="text-foreground mb-4 text-3xl font-bold">
         {{ .Title }}
@@ -13,12 +12,10 @@
       {{ end }}
     </header>
 
-    <!-- 内容列表 -->
     {{ $pages := .Paginator.Pages }}
     {{ if $pages }}
       <div class="space-y-6">
         {{ range $pages }}
-          <!-- 简单的列表项 -->
           <article class="border-border hover:bg-muted/30 rounded-lg border p-6 transition-colors">
             <h2 class="text-foreground mb-2 text-xl font-semibold">
               <a href="{{ .RelPermalink }}" class="hover:text-primary transition-colors">
@@ -43,10 +40,8 @@
         {{ end }}
       </div>
 
-      <!-- 分页导航 -->
       {{ partial "navigation/pagination.html" . }}
     {{ else }}
-      <!-- 空状态 -->
       <div class="py-16 text-center">
         <div
           class="bg-muted/50 mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full"

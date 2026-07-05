@@ -1,8 +1,5 @@
-{{/* KaTeX 数学公式支持
-  支持全局配置和页面级配置，包括自定义 delimiter
 */}}
 
-{{/* 获取全局配置 */}}
 {{- $globalKatex := site.Params.katex -}}
 {{- $globalEnabled := false -}}
 {{- $globalDelimiters := slice -}}
@@ -16,7 +13,6 @@
   {{- end -}}
 {{- end -}}
 
-{{/* 获取页面级配置 */}}
 {{- $pageKatex := .Params.katex -}}
 {{- $pageEnabled := false -}}
 {{- $pageDelimiters := slice -}}
@@ -30,7 +26,6 @@
   {{- end -}}
 {{- end -}}
 
-{{/* 检查是否需要加载 KaTeX */}}
 {{- $featureEnabled := or $globalEnabled $pageEnabled -}}
 {{- $contentToScan := .Content -}}
 {{- $hasBlockMath := gt (len (findRE `\$\$` $contentToScan)) 0 -}}
@@ -40,7 +35,6 @@
 {{- $shouldLoad := and $featureEnabled (or $hasBlockMath $hasParenMath $hasBracketMath $hasInlineMath) -}}
 
 {{- if $shouldLoad -}}
-  <!-- KaTeX 数学公式支持 -->
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"

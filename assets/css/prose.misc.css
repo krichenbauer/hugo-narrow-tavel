@@ -1,9 +1,7 @@
-/* 分隔线 */
 .prose hr {
   @apply via-border my-8 h-px border-0 bg-gradient-to-r from-transparent to-transparent;
 }
 
-/* 图片样式 */
 .prose img {
   @apply mx-auto rounded-lg shadow-md;
   margin: 0 auto;
@@ -21,7 +19,6 @@
   font-style: italic;
 }
 
-/* 强调文本 */
 .prose strong {
   color: var(--tw-prose-bold);
   font-weight: 600;
@@ -32,7 +29,6 @@
   color: var(--tw-prose-body);
 }
 
-/* 删除线文本 */
 .prose del,
 .prose s {
   text-decoration: line-through;
@@ -40,7 +36,6 @@
   opacity: 0.8;
 }
 
-/* 高亮文本 */
 .prose mark {
   background: linear-gradient(
     135deg,
@@ -53,7 +48,6 @@
   font-weight: 500;
 }
 
-/* 上标和下标 */
 .prose sup {
   font-size: 0.75rem;
   line-height: 1;
@@ -70,7 +64,6 @@
   font-weight: 500;
 }
 
-/* 键盘按键 */
 .prose kbd {
   @apply inline-flex items-center rounded border px-2 py-1 font-mono text-xs font-semibold;
   background: var(--color-muted);
@@ -81,7 +74,6 @@
   min-height: 1.5rem;
 }
 
-/* 缩写 */
 .prose abbr {
   text-decoration: underline;
   text-decoration-style: dotted;
@@ -89,7 +81,6 @@
   cursor: help;
 }
 
-/* 详情折叠 (Details/Summary) */
 .prose details {
   margin: 1.5rem 0;
   border: 1px solid var(--color-border);
@@ -124,7 +115,6 @@
 }
 
 .prose details summary::before {
-  content: "▶";
   position: absolute;
   right: 1.5rem;
   top: 50%;
