@@ -12,13 +12,13 @@
     {{ $pages := $featured | append $others }}
 
     {{ if gt (len $pages) 0 }}
-      <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <div class="space-y-4">
         {{ range $pages }}
           {{ partial "places/card.html" (dict "page" .) }}
         {{ end }}
       </div>
     {{ else }}
-      <p class="text-neutral-600">Noch keine Orte vorhanden.</p>
+      <p class="text-muted-foreground">Noch keine Orte vorhanden.</p>
     {{ end }}
   </section>
 {{ end }}

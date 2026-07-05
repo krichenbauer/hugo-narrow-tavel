@@ -13,13 +13,20 @@
 .travel-badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, var(--color-primary) 18%);
   border-radius: 9999px;
   padding: 0.25rem 0.625rem;
   font-size: 0.75rem;
   line-height: 1;
-  background: rgba(59, 130, 246, 0.08);
-  color: rgb(30, 58, 138);
+  background: color-mix(in srgb, var(--color-card) 90%, var(--color-primary) 10%);
+  color: var(--color-foreground);
+  transition: all 0.2s ease;
+}
+
+.travel-badge:hover {
+  border-color: color-mix(in srgb, var(--color-border) 55%, var(--color-primary) 45%);
+  background: color-mix(in srgb, var(--color-card) 80%, var(--color-primary) 20%);
+  color: var(--color-primary);
 }
 
 .travel-badge-lg {
@@ -31,30 +38,37 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(30, 64, 175);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, var(--color-primary) 30%);
   border-radius: 0.625rem;
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: rgb(30, 64, 175);
-  background: white;
+  color: var(--color-primary);
+  background: var(--color-card);
+  transition: all 0.2s ease;
 }
 
 .travel-button:hover {
-  background: rgba(59, 130, 246, 0.08);
+  border-color: color-mix(in srgb, var(--color-border) 50%, var(--color-primary) 50%);
+  background: color-mix(in srgb, var(--color-card) 82%, var(--color-primary) 18%);
 }
 
 .travel-link {
-  color: rgb(30, 64, 175);
+  color: var(--color-primary);
   text-decoration: underline;
   text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.travel-link:hover {
+  color: color-mix(in srgb, var(--color-primary) 88%, var(--color-foreground) 12%);
 }
 
 .travel-card:focus-within,
 .travel-button:focus-visible,
 .travel-link:focus-visible,
 .travel-badge:focus-visible {
-  outline: 2px solid rgb(37, 99, 235);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 

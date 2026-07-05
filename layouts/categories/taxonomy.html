@@ -2,7 +2,7 @@
   <section class="mx-auto px-4 py-6">
     <header class="mb-8">
       <h1 class="mb-2 text-3xl font-bold">{{ .Title }}</h1>
-      <p class="text-neutral-700">Kategorien fuer Orte durchsuchen.</p>
+      <p class="text-muted-foreground">Kategorien fuer Orte durchsuchen.</p>
     </header>
 
     {{ if gt (len .Data.Terms) 0 }}
@@ -15,7 +15,7 @@
         {{ end }}
       </div>
     {{ else }}
-      <p class="text-neutral-600">Keine Kategorien gefunden.</p>
+      <p class="text-muted-foreground">Keine Kategorien gefunden.</p>
     {{ end }}
   </section>
 {{ end }}
