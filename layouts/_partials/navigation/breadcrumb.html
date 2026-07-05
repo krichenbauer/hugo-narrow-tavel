@@ -4,6 +4,9 @@
       class="text-muted-foreground scrollbar-hide flex items-center space-x-1 overflow-x-auto py-1 text-sm whitespace-nowrap md:space-x-2"
     >
       {{ range $index, $ancestor := .Ancestors.Reverse }}
+        {{ if and (eq $ancestor.Kind "section") (eq $ancestor.Section "places") }}
+          {{ continue }}
+        {{ end }}
         {{ if eq $index 0 }}
           <li class="shrink-0">
             <a
