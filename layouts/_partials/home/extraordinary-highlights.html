@@ -1,0 +1,52 @@
+{{ $sightCategories := slice "sightseeing" "viewpoint" }}
+
+{{ $allPlaces := where .Site.RegularPages "Section" "places" }}
+{{ $ratedPlaces := where $allPlaces "Params.rating" 3 }}
+{{ $sights := slice }}
+{{ range $ratedPlaces }}
+  {{ $cats := .Params.categories | default (slice) }}
+  {{ if gt (len (intersect $cats $sightCategories)) 0 }}
+    {{ $sights = $sights | append . }}
+  {{ end }}
+{{ end }}
+{{ $sights = sort $sights "Weight" "asc" }}
+
+{{ $areas := where .Site.RegularPages "Section" "areas" }}
+{{ $areas = where $areas "Params.rating" 3 }}
+{{ $areas = sort $areas "Weight" "asc" }}
+
+<section class="space-y-10">
+  <section>
+    <header class="mb-4">
+      <h2 class="text-foreground text-2xl font-bold">Sehenswuerdigkeiten</h2>
+      <p class="text-muted-foreground text-sm">Nur aussergewoehnliche Highlights (3 Sterne).</p>
+    </header>
+
+    {{ if gt (len $sights) 0 }}
+      <div class="space-y-4">
+        {{ range $sights }}
+          {{ partial "places/card.html" (dict "page" .) }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-muted-foreground">Noch keine aussergewoehnlichen Sehenswuerdigkeiten hinterlegt.</p>
+    {{ end }}
+  </section>
+
+  <section>
+    <header class="mb-4">
+      <h2 class="text-foreground text-2xl font-bold">Gebiete</h2>
+      <p class="text-muted-foreground text-sm">Nur aussergewoehnliche Gebiete (3 Sterne).</p>
+    </header>
+
+    {{ if gt (len $areas) 0 }}
+      <div class="space-y-4">
+        {{ range $areas }}
+          {{ partial "content/card-base.html" (dict "page" .) }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-muted-foreground">Noch keine aussergewoehnlichen Gebiete hinterlegt.</p>
+    {{ end }}
+  </section>
+</section>
