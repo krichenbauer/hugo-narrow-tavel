@@ -1,0 +1,89 @@
+{{- $page := .page -}}
+{{- $hero := false -}}
+{{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
+  {{- if not $hero -}}
+    {{- with $page.Resources.GetMatch . -}}
+      {{- $hero = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $hero -}}
+  {{- with index ($page.Resources.ByType "image") 0 -}}
+    {{- $hero = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $summaryContent := "" -}}
+{{- if $page.Params.summary -}}
+  {{- $summaryContent = $page.Params.summary -}}
+{{- else if $page.Params.description -}}
+  {{- $summaryContent = $page.Params.description -}}
+{{- else if $page.Summary -}}
+  {{- $summaryContent = $page.Summary | plainify | truncate 140 -}}
+{{- end -}}
+
+<article class="travel-card group">
+  <a href="{{ $page.RelPermalink }}" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/30">
+    <div class="bg-card border-border hover:bg-primary/5 hover:border-primary/20 relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg md:flex-row">
+      {{ if $hero }}
+        {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType }}
+        {{ $alt := $hero.Params.alt | default $page.Title }}
+        <div class="p-3 pb-0 md:order-last md:w-64 md:shrink-0 md:p-3 md:pl-0">
+          <div class="relative aspect-video h-full w-full overflow-hidden rounded-lg md:aspect-video">
+            {{ if $isRaster }}
+              {{ $thumb := $hero.Fill "720x480" }}
+              <img
+                src="{{ $thumb.RelPermalink }}"
+                alt="{{ $alt }}"
+                width="{{ $thumb.Width }}"
+                height="{{ $thumb.Height }}"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            {{ else }}
+              <img
+                src="{{ $hero.RelPermalink }}"
+                alt="{{ $alt }}"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+
+      <div class="flex flex-1 flex-col justify-center gap-4 p-6">
+        <h3 class="text-foreground group-hover:text-primary text-xl leading-tight font-bold transition-colors duration-200">{{ $page.Title }}</h3>
+
+        {{ if $summaryContent }}
+          <p class="text-muted-foreground line-clamp-3 text-sm leading-relaxed md:line-clamp-2">{{ $summaryContent }}</p>
+        {{ end }}
+
+        <div class="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+          {{ with $page.Params.district }}
+            <div class="flex items-center gap-1.5">
+              {{ partial "features/icon.html" (dict "name" "location" "size" "sm" "ariaLabel" "") }}
+              <span class="font-medium">{{ . }}</span>
+            </div>
+          {{ end }}
+
+          <div class="flex items-center gap-1.5">
+            {{ partial "content/rating-stars.html" (dict "rating" $page.Params.rating) }}
+          </div>
+
+          {{ with $page.Params.best_for }}
+            <div class="ml-auto flex flex-wrap items-center gap-1.5 md:ml-0" aria-label="Geeignet fuer">
+              {{ range . }}
+                <span class="bg-muted/50 border-muted/30 flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs">
+                  <span class="font-medium">{{ . }}</span>
+                </span>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </a>
+</article>
