@@ -1,17 +1,5 @@
 {{- $page := .page -}}
-{{- $hero := false -}}
-{{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
-  {{- if not $hero -}}
-    {{- with $page.Resources.GetMatch . -}}
-      {{- $hero = . -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-{{- if not $hero -}}
-  {{- with index ($page.Resources.ByType "image") 0 -}}
-    {{- $hero = . -}}
-  {{- end -}}
-{{- end -}}
+{{- $hero := partial "content/resolve-title-image.html" (dict "page" $page) -}}
 
 {{- if $hero -}}
   {{- $alt := $hero.Params.alt | default $page.Params.hero_alt | default $page.Title -}}

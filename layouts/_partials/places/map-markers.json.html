@@ -5,19 +5,7 @@
   {{- $page := . -}}
   {{- $coords := $page.Params.coordinates -}}
   {{- if and $coords $coords.latitude $coords.longitude -}}
-    {{- $hero := false -}}
-    {{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
-      {{- if not $hero -}}
-        {{- with $page.Resources.GetMatch . -}}
-          {{- $hero = . -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-    {{- if not $hero -}}
-      {{- with index ($page.Resources.ByType "image") 0 -}}
-        {{- $hero = . -}}
-      {{- end -}}
-    {{- end -}}
+    {{- $hero := partial "content/resolve-title-image.html" (dict "page" $page) -}}
 
     {{- $thumb := "" -}}
     {{- if $hero -}}
@@ -54,37 +42,8 @@
 {{- $allAreas := where .Site.RegularPages "Section" "areas" -}}
 {{- range $allAreas -}}
   {{- $area := . -}}
-  {{- $relatedPlaces := slice -}}
-  {{- $slugs := $area.Params.highlight_places | default (slice) -}}
-
-  {{- if gt (len $slugs) 0 -}}
-    {{- range $slugs -}}
-      {{- with $.Site.GetPage (printf "/places/%s" .) -}}
-        {{- $place := . -}}
-        {{- with $place.Params.coordinates -}}
-          {{- if and .latitude .longitude -}}
-            {{- $relatedPlaces = $relatedPlaces | append $place -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-  {{- else -}}
-    {{- $district := $area.Params.district | default $area.Title -}}
-    {{- $relatedPlaces = where $allPlaces "Params.district" $district -}}
-  {{- end -}}
-
-  {{- if gt (len $relatedPlaces) 0 -}}
-    {{- $sumLat := 0.0 -}}
-    {{- $sumLon := 0.0 -}}
-    {{- $count := len $relatedPlaces -}}
-    {{- range $relatedPlaces -}}
-      {{- $sumLat = add $sumLat (float .Params.coordinates.latitude) -}}
-      {{- $sumLon = add $sumLon (float .Params.coordinates.longitude) -}}
-    {{- end -}}
-
-    {{- $centerLat := div $sumLat $count -}}
-    {{- $centerLon := div $sumLon $count -}}
-
+  {{- with $area.Params.coordinates -}}
+    {{- if and .latitude .longitude -}}
     {{- $summary := $area.Summary | default (printf "Gebietszentrum fuer %s." $area.Title) -}}
     {{- $areaMarker := dict
       "type" "area"
@@ -94,11 +53,12 @@
       "categories" (slice "area")
       "primaryCategory" "area"
       "district" ($area.Params.district | default $area.Title)
-      "latitude" $centerLat
-      "longitude" $centerLon
+      "latitude" .latitude
+      "longitude" .longitude
       "thumbnail" ""
     -}}
     {{- $markers = $markers | append $areaMarker -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 

@@ -1,0 +1,27 @@
+{{- $page := .page -}}
+{{- $hero := false -}}
+{{- $titleImage := $page.Params.title_image | default $page.Params.hero_image | default "" -}}
+
+{{- if $titleImage -}}
+  {{- with $page.Resources.GetMatch $titleImage -}}
+    {{- $hero = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $hero -}}
+  {{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
+    {{- if not $hero -}}
+      {{- with $page.Resources.GetMatch . -}}
+        {{- $hero = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $hero -}}
+  {{- with index ($page.Resources.ByType "image") 0 -}}
+    {{- $hero = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $hero -}}

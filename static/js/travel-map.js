@@ -31,6 +31,12 @@
     zoomControl: false,
   }).setView([43.0618, 141.3545], 12);
 
+  // Keep area markers behind place markers when coordinates overlap.
+  map.createPane("areasPane");
+  map.getPane("areasPane").style.zIndex = 450;
+  map.createPane("placesPane");
+  map.getPane("placesPane").style.zIndex = 500;
+
   L.control.zoom({
     zoomInTitle: "Hineinzoomen",
     zoomOutTitle: "Herauszoomen",
@@ -80,6 +86,7 @@
         ].join("");
 
         L.circleMarker([lat, lon], {
+          pane: item.type === "area" ? "areasPane" : "placesPane",
           radius: markerRadiusFor(item),
           color: "#ffffff",
           weight: markerBorderFor(item),
