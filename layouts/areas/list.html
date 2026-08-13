@@ -11,7 +11,7 @@
     {{ if gt (len $areas) 0 }}
       <div class="space-y-4">
         {{ range $areas }}
-          {{ partial "content/card-base.html" (dict "page" .) }}
+          {{ partial "areas/card.html" (dict "page" .) }}
         {{ end }}
       </div>
     {{ else }}

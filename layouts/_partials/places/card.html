@@ -1,17 +1,5 @@
 {{- $page := .page -}}
-{{- $hero := false -}}
-{{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
-  {{- if not $hero -}}
-    {{- with $page.Resources.GetMatch . -}}
-      {{- $hero = . -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-{{- if not $hero -}}
-  {{- with index ($page.Resources.ByType "image") 0 -}}
-    {{- $hero = . -}}
-  {{- end -}}
-{{- end -}}
+{{- $hero := partial "content/resolve-title-image.html" (dict "page" $page) -}}
 
 {{- $summaryContent := "" -}}
 {{- if $page.Params.summary -}}
@@ -51,10 +39,6 @@
             />
           {{ end }}
         </div>
-      </div>
-    {{ else }}
-      <div class="p-3 pb-0 md:order-last md:w-64 md:shrink-0 md:p-3 md:pl-0">
-        <div class="bg-muted text-muted-foreground flex aspect-video h-full w-full items-center justify-center rounded-lg md:aspect-video">Kein Bild</div>
       </div>
     {{ end }}
 

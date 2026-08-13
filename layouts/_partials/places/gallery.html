@@ -1,20 +1,6 @@
 {{- $page := .page -}}
 {{- $images := $page.Resources.ByType "image" -}}
-{{- $hero := false -}}
-{{- range slice "hero.jpg" "hero.jpeg" "hero.png" "hero.webp" "hero.svg" -}}
-  {{- if not $hero -}}
-    {{- with $page.Resources.GetMatch . -}}
-      {{- $hero = . -}}
-    {{- end -}}
-  {{- end -}}
-{{- end -}}
-
-{{- $gallery := slice -}}
-{{- range $images -}}
-  {{- if or (not $hero) (ne .Name $hero.Name) -}}
-    {{- $gallery = $gallery | append . -}}
-  {{- end -}}
-{{- end -}}
+{{- $gallery := $images -}}
 
 {{- if gt (len $gallery) 0 -}}
 <section class="travel-gallery mt-8" aria-label="Bildergalerie">
