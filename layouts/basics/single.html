@@ -1,4 +1,5 @@
 {{ define "main" }}
+  {{- $hero := partial "content/resolve-title-image.html" (dict "page" .) -}}
   <article class="mx-auto w-full px-4 py-6">
     <header class="mb-6 space-y-3">
       <h1 class="text-3xl font-bold md:text-4xl">{{ .Title }}</h1>
@@ -6,6 +7,37 @@
         <p class="text-muted-foreground max-w-3xl text-base md:text-lg">{{ . }}</p>
       {{ end }}
     </header>
+
+    {{- if $hero -}}
+      {{- $alt := $hero.Params.alt | default .Title -}}
+      {{- $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType -}}
+      <figure class="travel-hero not-prose mb-8">
+        {{- if $isRaster -}}
+          {{- $small := $hero.Fit "640x360" -}}
+          {{- $medium := $hero.Fit "960x540" -}}
+          {{- $large := $hero.Fit "1440x810" -}}
+          <img
+            src="{{ $large.RelPermalink }}"
+            srcset="{{ $small.RelPermalink }} 640w, {{ $medium.RelPermalink }} 960w, {{ $large.RelPermalink }} 1440w"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
+            width="{{ $large.Width }}"
+            height="{{ $large.Height }}"
+            alt="{{ $alt }}"
+            loading="eager"
+            decoding="async"
+            class="h-auto w-full rounded-xl border border-neutral-200 object-cover shadow-sm"
+          />
+        {{- else -}}
+          <img
+            src="{{ $hero.RelPermalink }}"
+            alt="{{ $alt }}"
+            loading="eager"
+            decoding="async"
+            class="h-auto w-full rounded-xl border border-neutral-200 object-cover shadow-sm"
+          />
+        {{- end -}}
+      </figure>
+    {{- end -}}
 
     <div class="prose prose-neutral max-w-none dark:prose-invert">
       {{ .Content }}
