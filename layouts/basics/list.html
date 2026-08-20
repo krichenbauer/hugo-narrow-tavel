@@ -1,0 +1,31 @@
+{{ define "main" }}
+  <section class="mx-auto px-4 py-6">
+    <header class="mb-8 space-y-3">
+      <h1 class="text-3xl font-bold">{{ .Title }}</h1>
+      {{ with .Summary }}
+        <p class="text-muted-foreground max-w-3xl text-base md:text-lg">{{ . }}</p>
+      {{ end }}
+      {{ with .Content }}
+        <div class="prose prose-neutral max-w-none dark:prose-invert">{{ . }}</div>
+      {{ end }}
+    </header>
+
+    {{ $pages := .Pages.ByWeight }}
+    {{ if gt (len $pages) 0 }}
+      <div class="space-y-4">
+        {{ range $pages }}
+          <article class="bg-card border-border rounded-xl border p-5 transition-colors hover:bg-primary/5 hover:border-primary/20">
+            <h2 class="text-foreground text-xl font-semibold">
+              <a href="{{ .RelPermalink }}" class="hover:text-primary transition-colors">{{ .Title }}</a>
+            </h2>
+            {{ with .Summary }}
+              <p class="text-muted-foreground mt-2 text-sm md:text-base">{{ . }}</p>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-muted-foreground">Noch keine Übersichtsseiten vorhanden.</p>
+    {{ end }}
+  </section>
+{{ end }}
