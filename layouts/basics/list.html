@@ -14,14 +14,7 @@
     {{ if gt (len $pages) 0 }}
       <div class="space-y-4">
         {{ range $pages }}
-          <article class="bg-card border-border rounded-xl border p-5 transition-colors hover:bg-primary/5 hover:border-primary/20">
-            <h2 class="text-foreground text-xl font-semibold">
-              <a href="{{ .RelPermalink }}" class="hover:text-primary transition-colors">{{ .Title }}</a>
-            </h2>
-            {{ with .Summary }}
-              <p class="text-muted-foreground mt-2 text-sm md:text-base">{{ . }}</p>
-            {{ end }}
-          </article>
+          {{ partial "basics/card.html" (dict "page" .) }}
         {{ end }}
       </div>
     {{ else }}
