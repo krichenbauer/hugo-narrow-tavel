@@ -10,8 +10,20 @@
     {{ partial "features/icon.html" (dict "name" "external-link" "class" "h-3 w-3 flex-shrink-0" "id" "external-link" "style" "color: #9ca3af; stroke: #9ca3af;") }}
   </a>
 {{- else -}}
+  {{- /* Resolve root-relative links ("/places/x/") so they work when the site lives in a subpath. */ -}}
+  {{- $dest := .Destination -}}
+  {{- if and (strings.HasPrefix $dest "/") (not (strings.HasPrefix $dest "//")) -}}
+    {{- $u := urls.Parse $dest -}}
+    {{- $path := strings.TrimSuffix "/" $u.Path | default "/" -}}
+    {{- $fragment := cond (ne $u.Fragment "") (printf "#%s" $u.Fragment) "" -}}
+    {{- with .PageInner.GetPage $path -}}
+      {{- $dest = printf "%s%s" .RelPermalink $fragment -}}
+    {{- else -}}
+      {{- $dest = strings.TrimPrefix "/" $dest | relURL -}}
+    {{- end -}}
+  {{- end -}}
   <a
-    href="{{ .Destination | safeURL }}"
+    href="{{ $dest | safeURL }}"
     {{- with .Title }}title="{{ . }}"{{ end -}}
   >
     {{- with .Text | safeHTML }}{{ . }}{{ end -}}
