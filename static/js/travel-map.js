@@ -11,6 +11,8 @@
       area: "#0072b2",
       sightseeing: "#e69f00",
       viewpoint: "#56b4e9",
+      museum: "#009e73",
+      park: "#f0e442",
       food: "#d55e00",
       restaurant: "#cc79a7",
     };
@@ -29,7 +31,7 @@
   var map = L.map(mapEl, {
     scrollWheelZoom: true,
     zoomControl: false,
-  }).setView([43.0618, 141.3545], 12);
+  }).setView(window.travelMapCenter || [0, 0], window.travelMapZoom || 12);
 
   // Keep area markers behind place markers when coordinates overlap.
   map.createPane("areasPane");

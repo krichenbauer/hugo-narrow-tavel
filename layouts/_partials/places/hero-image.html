@@ -29,8 +29,6 @@
         class="h-auto w-full rounded-xl border border-neutral-200 object-cover shadow-sm"
       />
     {{- end -}}
-    {{ with $hero.Title }}
-      <figcaption class="mt-2 text-sm text-neutral-600">{{ . }}</figcaption>
-    {{ end }}
+    {{ partial "content/image-caption.html" (dict "image" $hero) }}
   </figure>
 {{- end -}}

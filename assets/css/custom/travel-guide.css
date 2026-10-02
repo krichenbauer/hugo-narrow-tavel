@@ -116,6 +116,14 @@
   background: #56b4e9;
 }
 
+.travel-map-dot-museum {
+  background: #009e73;
+}
+
+.travel-map-dot-park {
+  background: #f0e442;
+}
+
 .travel-map-dot-food {
   background: #d55e00;
 }
@@ -126,4 +134,21 @@
 
 .travel-map-dot-other {
   background: #444444;
+}
+
+.travel-caption {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--color-muted-foreground);
+}
+
+.travel-credit {
+  opacity: 0.85;
+}
+
+.travel-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
 }

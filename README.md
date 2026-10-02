@@ -25,6 +25,42 @@ The current variant extends that base toward travel-guide use cases.
 - Responsive layout and keyboard-accessible interactions
 - Portable Markdown-first authoring approach
 
+## Site Configuration
+
+```yaml
+# config/_default/params.yaml
+home:
+  contentOrder:
+    - intro                    # renders content/_index.md (optional)
+    - extraordinary-highlights # 3-star places and areas
+
+map:
+  center: [44.8125, 20.4612]   # initial view before markers load; map then fits to markers
+  zoom: 13
+```
+
+## Image Captions And Credits
+
+Hero and gallery images show a caption from page resource metadata
+(`layouts/_partials/content/image-caption.html`):
+
+```yaml
+resources:
+  - src: hero.jpg
+    title: "Caption"
+    params:
+      alt: "Alt text"
+      credit: "Foto: Name, CC BY-SA 4.0"
+      credit_url: "https://commons.wikimedia.org/wiki/File:..."
+```
+
+The hero is excluded from the gallery. Area pages show a hero image as well.
+
+## Map Legend
+
+Marker colors exist for `area`, `sightseeing`, `viewpoint`, `museum`, `park`, `food` and
+`restaurant` (first category of a place). The legend only lists categories in use.
+
 ## Development
 
 Run the local example site:

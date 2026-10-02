@@ -1,0 +1,11 @@
+{{- /* Renders the homepage Markdown (content/_index.md). Enable via home.contentOrder: [intro, ...]. */ -}}
+{{ with .Content }}
+  <section class="mb-10">
+    <header class="mb-4">
+      <h1 class="text-foreground text-3xl font-bold md:text-4xl">{{ $.Title }}</h1>
+    </header>
+    <div class="prose prose-neutral dark:prose-invert max-w-none">
+      {{ . }}
+    </div>
+  </section>
+{{ end }}

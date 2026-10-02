@@ -1,0 +1,32 @@
+{{- /*
+  Renders a figcaption for a page resource image.
+  Uses resource metadata from front matter:
+    resources:
+      - src: hero.jpg
+        title: "Caption text"
+        params:
+          credit: "Foto: Name, CC BY-SA 4.0"
+          credit_url: "https://commons.wikimedia.org/wiki/File:..."
+  The resource title is ignored when it is only the file name (Hugo default).
+*/ -}}
+{{- $img := .image -}}
+{{- $caption := "" -}}
+{{- if and $img.Title (ne $img.Title $img.Name) -}}
+  {{- $caption = $img.Title -}}
+{{- end -}}
+{{- $credit := $img.Params.credit -}}
+{{- $creditURL := $img.Params.credit_url -}}
+{{- if or $caption $credit -}}
+  <figcaption class="travel-caption {{ .class }}">
+    {{- with $caption }}<span>{{ . }}</span>{{ end -}}
+    {{- with $credit -}}
+      {{ if $caption }} {{ end }}<span class="travel-credit">
+        {{- if $creditURL -}}
+          <a href="{{ $creditURL }}" target="_blank" rel="noopener noreferrer">{{ . }}</a>
+        {{- else -}}
+          {{ . }}
+        {{- end -}}
+      </span>
+    {{- end -}}
+  </figcaption>
+{{- end -}}

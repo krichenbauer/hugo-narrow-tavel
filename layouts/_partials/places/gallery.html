@@ -1,6 +1,12 @@
 {{- $page := .page -}}
 {{- $images := $page.Resources.ByType "image" -}}
-{{- $gallery := $images -}}
+{{- $hero := partial "content/resolve-title-image.html" (dict "page" $page) -}}
+{{- $gallery := slice -}}
+{{- range $images -}}
+  {{- if not (and $hero (eq .Name $hero.Name)) -}}
+    {{- $gallery = $gallery | append . -}}
+  {{- end -}}
+{{- end -}}
 
 {{- if gt (len $gallery) 0 -}}
 <section class="travel-gallery mt-8" aria-label="Bildergalerie">
@@ -9,6 +15,7 @@
     {{ range $idx, $img := $gallery }}
       {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $img.MediaType.SubType }}
       {{ $alt := $img.Params.alt | default $img.Title | default (printf "%s image %d" $page.Title (add $idx 1)) }}
+      <figure class="m-0">
       <a href="{{ $img.RelPermalink }}" class="group block overflow-hidden rounded-lg border border-neutral-200" target="_blank" rel="noopener noreferrer">
         {{ if $isRaster }}
           {{ $thumb := $img.Fill "720x540" }}
@@ -31,6 +38,8 @@
           />
         {{ end }}
       </a>
+      {{ partial "content/image-caption.html" (dict "image" $img) }}
+      </figure>
     {{ end }}
   </div>
 </section>

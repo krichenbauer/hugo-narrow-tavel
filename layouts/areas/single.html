@@ -13,7 +13,9 @@
       {{ end }}
     </header>
 
-    <div class="grid gap-8 lg:grid-cols-[2fr_1fr]">
+    {{ partial "places/hero-image.html" (dict "page" .) }}
+
+    <div class="mt-8 grid gap-8 lg:grid-cols-[2fr_1fr]">
       <div class="min-w-0 space-y-8">
         <div class="prose prose-neutral max-w-none dark:prose-invert">
           {{ .Content }}
@@ -34,7 +36,7 @@
         {{ if gt (len $highlightPages) 0 }}
           <section class="space-y-4">
             <h2 class="text-2xl font-semibold">Orte</h2>
-            <!--p class="text-muted-foreground text-sm">Ausgewaehlte Beispiele, damit der Fokus auf dem Gebiet bleibt.</p-->
+            <!--p class="text-muted-foreground text-sm">Ausgewählte Beispiele, damit der Fokus auf dem Gebiet bleibt.</p-->
             <div class="space-y-4">
               {{ range $highlightPages }}
                 {{ partial "places/card.html" (dict "page" .) }}
@@ -50,7 +52,7 @@
 
           {{ with .Params.best_for }}
             <div class="mb-3">
-              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Geeignet fuer</h3>
+              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Geeignet für</h3>
               <div class="flex flex-wrap gap-2">
                 {{ range . }}
                   <span class="bg-muted/50 border-muted/30 rounded-md border px-2 py-0.5 text-xs font-medium">{{ . }}</span>

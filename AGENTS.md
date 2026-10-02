@@ -114,3 +114,10 @@ display text. Content is multilingual via `.<lang>.md` filename suffixes (e.g. `
 - Keep template/JS comments in English for consistency.
 - `data-theme` color values are **oklch**; keep new themes in the same color space and define both
   the base and `.dark` variants.
+
+## Travel-guide specifics
+
+- Hardcoded UI strings in travel templates are German (use real umlauts, not ae/oe/ue).
+- Site-specific values (map center/zoom) come from `site.Params.map`, never hardcode a city.
+- Image captions/credits: `_partials/content/image-caption.html`, used by hero, basics hero and gallery.
+- Travel CSS lives in `assets/css/custom/travel-guide.css` (loaded separately, no Tailwind recompile needed).

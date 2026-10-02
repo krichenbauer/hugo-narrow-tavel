@@ -11,45 +11,53 @@
       <div id="travel-map" class="travel-map" aria-label="Karte der Orte"></div>
     </div>
 
-    <section class="travel-map-legend mt-4" aria-label="Legende fuer Kartenmarker">
+    <section class="travel-map-legend mt-4" aria-label="Legende für Kartenmarker">
       <h2 class="mb-2 text-sm font-semibold">Legende</h2>
+      {{/* Only list marker colors for categories that are used as primary category. */}}
+      {{ $knownCategories := slice "sightseeing" "viewpoint" "museum" "park" "food" "restaurant" }}
+      {{ $usedCategories := slice }}
+      {{ range where site.RegularPages "Section" "places" }}
+        {{ with .Params.categories }}
+          {{ $usedCategories = $usedCategories | append (index . 0) }}
+        {{ end }}
+      {{ end }}
+      {{ $usedCategories = $usedCategories | uniq }}
       <ul class="grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
         <li class="travel-map-legend-item">
           <span class="travel-map-dot travel-map-dot-area" aria-hidden="true"></span>
           <span>Gebiete</span>
         </li>
-        <li class="travel-map-legend-item">
-          <span class="travel-map-dot travel-map-dot-sightseeing" aria-hidden="true"></span>
-          <span>Sehenswuerdigkeiten</span>
-        </li>
-        <li class="travel-map-legend-item">
-          <span class="travel-map-dot travel-map-dot-viewpoint" aria-hidden="true"></span>
-          <span>Aussichtspunkte</span>
-        </li>
-        <li class="travel-map-legend-item">
-          <span class="travel-map-dot travel-map-dot-food" aria-hidden="true"></span>
-          <span>Essen</span>
-        </li>
-        <li class="travel-map-legend-item">
-          <span class="travel-map-dot travel-map-dot-restaurant" aria-hidden="true"></span>
-          <span>Restaurant</span>
-        </li>
-        <li class="travel-map-legend-item">
-          <span class="travel-map-dot travel-map-dot-other" aria-hidden="true"></span>
-          <span>Weitere Kategorien</span>
-        </li>
+        {{ range $knownCategories }}
+          {{ if in $usedCategories . }}
+            {{ $term := site.GetPage (printf "/categories/%s" .) }}
+            <li class="travel-map-legend-item">
+              <span class="travel-map-dot travel-map-dot-{{ . }}" aria-hidden="true"></span>
+              <span>{{ with $term }}{{ .LinkTitle }}{{ else }}{{ . | humanize }}{{ end }}</span>
+            </li>
+          {{ end }}
+        {{ end }}
+        {{ if gt (len (complement $knownCategories $usedCategories)) 0 }}
+          <li class="travel-map-legend-item">
+            <span class="travel-map-dot travel-map-dot-other" aria-hidden="true"></span>
+            <span>Weitere Kategorien</span>
+          </li>
+        {{ end }}
       </ul>
-      <p class="text-muted-foreground mt-2 text-xs">Die Markerfarben sind auf gute Unterscheidbarkeit bei Rot-Gruen-Sehschwaeche abgestimmt.</p>
+      <p class="text-muted-foreground mt-2 text-xs">Die Markerfarben sind auf gute Unterscheidbarkeit bei Rot-Grün-Sehschwäche abgestimmt.</p>
     </section>
 
     <noscript>
-      <p class="text-muted-foreground mt-3 text-sm">Die interaktive Karte benoetigt JavaScript.</p>
+      <p class="text-muted-foreground mt-3 text-sm">Die interaktive Karte benötigt JavaScript.</p>
     </noscript>
   </section>
 
   <link rel="stylesheet" href="{{ "vendor/leaflet/leaflet.css" | relURL }}" />
   <script>
     window.travelMapDataUrl = "{{ .RelPermalink }}index.json";
+    {{- with site.Params.map }}
+    window.travelMapCenter = {{ .center | default (slice 0 0) }};
+    window.travelMapZoom = {{ .zoom | default 12 }};
+    {{- end }}
   </script>
   <script src="{{ "vendor/leaflet/leaflet.js" | relURL }}"></script>
   <script src="{{ "js/travel-map.js" | relURL }}"></script>

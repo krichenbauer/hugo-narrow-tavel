@@ -44,7 +44,7 @@
   {{- $area := . -}}
   {{- with $area.Params.coordinates -}}
     {{- if and .latitude .longitude -}}
-    {{- $summary := $area.Summary | default (printf "Gebietszentrum fuer %s." $area.Title) -}}
+    {{- $summary := $area.Summary | default (printf "Gebietszentrum für %s." $area.Title) -}}
     {{- $areaMarker := dict
       "type" "area"
       "title" $area.Title

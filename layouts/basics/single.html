@@ -36,6 +36,7 @@
             class="h-auto w-full rounded-xl border border-neutral-200 object-cover shadow-sm"
           />
         {{- end -}}
+        {{ partial "content/image-caption.html" (dict "image" $hero) }}
       </figure>
     {{- end -}}
 
