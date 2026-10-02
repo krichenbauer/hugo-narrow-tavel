@@ -43,5 +43,6 @@
     <div class="prose prose-neutral max-w-none dark:prose-invert">
       {{ .Content }}
     </div>
+    {{ partial "places/gallery.html" (dict "page" .) }}
   </article>
 {{ end }}

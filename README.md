@@ -54,7 +54,7 @@ resources:
       credit_url: "https://commons.wikimedia.org/wiki/File:..."
 ```
 
-The hero is excluded from the gallery. Area pages show a hero image as well.
+The hero is excluded from the gallery. Area pages show a hero image as well; basics pages show a gallery.
 
 ## Map Legend
 
