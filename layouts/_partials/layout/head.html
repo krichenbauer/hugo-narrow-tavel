@@ -76,9 +76,7 @@
   <link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}" />
 {{ end }}
 
-{{- if or .IsPage .IsHome .IsSection .IsNode -}}
-  {{- $_ := .Content -}}
-{{- end -}}
+{{- $_ := .Content -}}
 
 {{- $searchConfig := partial "config/search.html" . -}}
 {{- $galleryConfig := partial "config/gallery.html" . -}}
