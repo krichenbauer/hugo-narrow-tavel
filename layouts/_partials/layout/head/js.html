@@ -20,7 +20,6 @@
   {{- end }}
 {{- end }}
 
-
 {{- if .IsPage }}
   {{- $tocConfig := partial "config/toc.html" . }}
   {{- if $tocConfig.enabled }}
@@ -48,7 +47,6 @@
   {{- end }}
 {{- end }}
 
-
 {{- with resources.Get "js/search.js" }}
   {{- $opts := dict
     "minify" (not hugo.IsDevelopment)
@@ -70,7 +68,6 @@
     {{- end }}
   {{- end }}
 {{- end }}
-
 
 {{- with resources.Get "js/dock.js" }}
   {{- $opts := dict
@@ -123,7 +120,6 @@
   {{- end }}
 {{ end }}
 
-
 {{- $customJsFiles := resources.Match "js/custom/*.js" }}
 {{- range $customJsFiles }}
   {{- $fileName := .Name }}
@@ -148,5 +144,3 @@
     {{- end }}
   {{- end }}
 {{- end }}
-
-

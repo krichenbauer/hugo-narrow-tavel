@@ -11,7 +11,11 @@
       {{- $large := $hero.Fit "1440x810" -}}
       <img
         src="{{ $large.RelPermalink }}"
-        srcset="{{ $small.RelPermalink }} 640w, {{ $medium.RelPermalink }} 960w, {{ $large.RelPermalink }} 1440w"
+        srcset="
+          {{ $small.RelPermalink }}  640w,
+          {{ $medium.RelPermalink }}  960w,
+          {{ $large.RelPermalink }} 1440w
+        "
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1100px"
         width="{{ $large.Width }}"
         height="{{ $large.Height }}"

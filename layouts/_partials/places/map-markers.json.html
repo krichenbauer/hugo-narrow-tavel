@@ -44,20 +44,20 @@
   {{- $area := . -}}
   {{- with $area.Params.coordinates -}}
     {{- if and .latitude .longitude -}}
-    {{- $summary := $area.Summary | default (printf "Gebietszentrum für %s." $area.Title) -}}
-    {{- $areaMarker := dict
-      "type" "area"
-      "title" $area.Title
-      "summary" ($summary | plainify)
-      "permalink" $area.RelPermalink
-      "categories" (slice "area")
-      "primaryCategory" "area"
-      "district" ($area.Params.district | default $area.Title)
-      "latitude" .latitude
-      "longitude" .longitude
-      "thumbnail" ""
-    -}}
-    {{- $markers = $markers | append $areaMarker -}}
+      {{- $summary := $area.Summary | default (printf "Gebietszentrum für %s." $area.Title) -}}
+      {{- $areaMarker := dict
+        "type" "area"
+        "title" $area.Title
+        "summary" ($summary | plainify)
+        "permalink" $area.RelPermalink
+        "categories" (slice "area")
+        "primaryCategory" "area"
+        "district" ($area.Params.district | default $area.Title)
+        "latitude" .latitude
+        "longitude" .longitude
+        "thumbnail" ""
+      -}}
+      {{- $markers = $markers | append $areaMarker -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

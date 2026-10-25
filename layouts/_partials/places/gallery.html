@@ -9,38 +9,43 @@
 {{- end -}}
 
 {{- if gt (len $gallery) 0 -}}
-<section class="travel-gallery mt-8" aria-label="Bildergalerie">
-  <h2 class="mb-3 text-xl font-semibold">Galerie</h2>
-  <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
-    {{ range $idx, $img := $gallery }}
-      {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $img.MediaType.SubType }}
-      {{ $alt := $img.Params.alt | default $img.Title | default (printf "%s image %d" $page.Title (add $idx 1)) }}
-      <figure class="m-0">
-      <a href="{{ $img.RelPermalink }}" class="group block overflow-hidden rounded-lg border border-neutral-200" target="_blank" rel="noopener noreferrer">
-        {{ if $isRaster }}
-          {{ $thumb := $img.Fill "720x540" }}
-          <img
-            src="{{ $thumb.RelPermalink }}"
-            width="{{ $thumb.Width }}"
-            height="{{ $thumb.Height }}"
-            alt="{{ $alt }}"
-            loading="lazy"
-            decoding="async"
-            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-          />
-        {{ else }}
-          <img
-            src="{{ $img.RelPermalink }}"
-            alt="{{ $alt }}"
-            loading="lazy"
-            decoding="async"
-            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-          />
-        {{ end }}
-      </a>
-      {{ partial "content/image-caption.html" (dict "image" $img) }}
-      </figure>
-    {{ end }}
-  </div>
-</section>
+  <section class="travel-gallery mt-8" aria-label="Bildergalerie">
+    <h2 class="mb-3 text-xl font-semibold">Galerie</h2>
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+      {{ range $idx, $img := $gallery }}
+        {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $img.MediaType.SubType }}
+        {{ $alt := $img.Params.alt | default $img.Title | default (printf "%s image %d" $page.Title (add $idx 1)) }}
+        <figure class="m-0">
+          <a
+            href="{{ $img.RelPermalink }}"
+            class="group block overflow-hidden rounded-lg border border-neutral-200"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ if $isRaster }}
+              {{ $thumb := $img.Fill "720x540" }}
+              <img
+                src="{{ $thumb.RelPermalink }}"
+                width="{{ $thumb.Width }}"
+                height="{{ $thumb.Height }}"
+                alt="{{ $alt }}"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            {{ else }}
+              <img
+                src="{{ $img.RelPermalink }}"
+                alt="{{ $alt }}"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            {{ end }}
+          </a>
+          {{ partial "content/image-caption.html" (dict "image" $img) }}
+        </figure>
+      {{ end }}
+    </div>
+  </section>
 {{- end -}}

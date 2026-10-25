@@ -15,6 +15,7 @@
 {{ $areas = where $areas "Params.rating" 3 }}
 {{ $areas = sort $areas "Weight" "asc" }}
 
+
 <section class="space-y-10">
   <section>
     <header class="mb-4">
@@ -29,7 +30,9 @@
         {{ end }}
       </div>
     {{ else }}
-      <p class="text-muted-foreground">Noch keine außergewöhnlichen Sehenswürdigkeiten hinterlegt.</p>
+      <p class="text-muted-foreground">
+        Noch keine außergewöhnlichen Sehenswürdigkeiten hinterlegt.
+      </p>
     {{ end }}
   </section>
 

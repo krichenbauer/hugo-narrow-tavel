@@ -4,6 +4,7 @@
     href="{{ .Destination | safeURL }}"
     {{- with .Title }}title="{{ . }}"{{ end -}}
     target="_blank"
+    rel="noopener noreferrer"
     class="inline-flex items-center gap-1"
   >
     {{- with .Text | safeHTML }}{{ . }}{{ end -}}

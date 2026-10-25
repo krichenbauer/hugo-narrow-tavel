@@ -3,7 +3,6 @@
     {{- $title := .Title | strings.TrimSpace -}}
     {{- $showDate := not .Date.IsZero -}}
 
-
     {{ if or $title $showDate }}
       <header class="mb-8">
         {{ with $title }}

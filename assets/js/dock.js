@@ -139,6 +139,8 @@
 
   const backBtn = document.getElementById("dock-back");
   if (backBtn) {
+    // Site home, correct also under a base path.
+    const homeUrl = (dock && dock.dataset.homeUrl) || "/";
     backBtn.addEventListener("click", function (e) {
       e.preventDefault();
 
@@ -153,9 +155,9 @@
           }
         }
 
-        window.location.href = "/";
+        window.location.href = homeUrl;
       } catch (error) {
-        window.location.href = "/";
+        window.location.href = homeUrl;
       }
     });
   }

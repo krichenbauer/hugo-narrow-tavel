@@ -11,6 +11,7 @@
     </div>
   {{ end }}
 
+
   <dl class="grid gap-2 text-sm">
     {{ with $page.Params.district }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
@@ -36,7 +37,11 @@
     {{ with $page.Params.website }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
         <dt class="text-muted-foreground font-medium">Webseite</dt>
-        <dd><a class="travel-link" href="{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a></dd>
+        <dd>
+          <a class="travel-link" href="{{ . }}" target="_blank" rel="noopener noreferrer"
+            >{{ . }}</a
+          >
+        </dd>
       </div>
     {{ end }}
 
