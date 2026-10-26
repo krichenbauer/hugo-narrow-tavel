@@ -37,7 +37,7 @@
       <nav class="mx-8 flex min-w-0 flex-1 items-center justify-center">
         <div class="flex flex-wrap items-center justify-center space-x-1">
           {{ $currentPage := . }}
-          {{ range site.Menus.main }}
+          {{ range partial "navigation/visible-menu.html" site.Menus.main }}
             {{ $menuURL := .URL }}
             {{ if .PageRef }}
               {{ with site.GetPage .PageRef }}

@@ -61,14 +61,7 @@ markup:
     tabWidth: 2
 
 outputs:
-  home: ["HTML", "RSS", "JSON", "WebAppManifest"]
-
-# Custom output formats
-outputFormats:
-  WebAppManifest:
-    mediaType: "application/manifest+json"
-    baseName: "site"
-    isPlainText: true
+  home: ["HTML", "RSS", "JSON"]
 
 module:
   hugoVersion:

@@ -412,7 +412,6 @@
     const title = normalizeText(record.title);
     const summary = normalizeText(record.summary);
     const content = normalizeText(record.content);
-    const tags = normalizeText(record.tags);
     const categories = normalizeText(record.categories);
 
     let score = 0;
@@ -422,11 +421,6 @@
 
       if (title.includes(keyword)) {
         score += 40;
-        keywordMatched = true;
-      }
-
-      if (tags.includes(keyword)) {
-        score += 18;
         keywordMatched = true;
       }
 

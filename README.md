@@ -2,7 +2,7 @@
 
 This theme is tailored for responsive travel-guide sites built with Hugo.
 
-It is intended for content models centered around places, routes, map overviews,
+It is intended for content models centered around areas, places, day trips, map overviews,
 and practical trip information, while keeping Markdown content portable for
 future exports (for example EPUB or PDF workflows).
 
@@ -58,8 +58,8 @@ The hero is excluded from the gallery. Area pages show a hero image as well; bas
 
 ## Map Legend
 
-Marker colors exist for `area`, `sightseeing`, `viewpoint`, `museum`, `park`, `food` and
-`restaurant` (first category of a place). The legend only lists categories in use.
+Marker colors exist for `area`, `sightseeing`, `viewpoint`, `museum`, `park`, and `food`
+(first category of a place). The legend only lists categories in use.
 
 ## Development
 

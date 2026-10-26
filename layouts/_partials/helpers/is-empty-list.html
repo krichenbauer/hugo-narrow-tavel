@@ -1,0 +1,4 @@
+{{- /* Whether a page is a list page without pages to list. Such pages are not
+  published and not linked from menus. The map is a list page with own content. */
+-}}
+{{- return and (in (slice "section" "taxonomy" "term") .Kind) (eq (len .Pages) 0) (ne .Type "map") -}}

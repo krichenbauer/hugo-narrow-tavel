@@ -14,7 +14,7 @@
     <section class="travel-map-legend mt-4" aria-label="Legende für Kartenmarker">
       <h2 class="mb-2 text-sm font-semibold">Legende</h2>
       {{/* Only list marker colors for categories that are used as primary category. */}}
-      {{ $knownCategories := slice "sightseeing" "viewpoint" "museum" "park" "food" "restaurant" }}
+      {{ $knownCategories := slice "sightseeing" "viewpoint" "museum" "park" "food" }}
       {{ $usedCategories := slice }}
       {{ range where site.RegularPages "Section" "places" }}
         {{ with .Params.categories }}

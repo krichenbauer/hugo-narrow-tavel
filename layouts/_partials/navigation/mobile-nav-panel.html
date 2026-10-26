@@ -11,7 +11,7 @@
   >
     <nav class="flex flex-col p-2">
       {{ $currentPage := . }}
-      {{ range site.Menus.main }}
+      {{ range partial "navigation/visible-menu.html" site.Menus.main }}
         {{ $menuURL := .URL }}
         {{ if .PageRef }}
           {{ with site.GetPage .PageRef }}

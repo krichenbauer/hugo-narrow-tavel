@@ -89,9 +89,16 @@ configured provider from params and include the matching sub-partial from `featu
 
 ### Output formats & search
 
-`home` outputs `HTML, RSS, JSON, WebAppManifest` (see `hugo.yaml`). The **search index is the JSON
+`home` outputs `HTML, RSS, JSON` (see `hugo.yaml`). The **search index is the JSON
 output** rendered by `layouts/index.json`; client-side search lives in `assets/js/search.js`.
-`layouts/index.webappmanifest` produces the PWA manifest.
+There is no web app manifest (PWA features are out of scope).
+
+### Empty list pages
+
+Section, taxonomy, and term pages without pages to list (`_partials/helpers/is-empty-list.html`)
+render nothing, so Hugo does not publish them; `layouts/sitemap.xml` leaves them out, and
+`_partials/navigation/visible-menu.html` hides menu entries that point to them or to missing pages.
+The map section is exempt.
 
 ### Extension points (for site authors, don't hardcode into the theme)
 

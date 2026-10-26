@@ -15,7 +15,6 @@
     "section" .Section
     "date" (partial "helpers/date.html" (dict "date" .Date "variant" "long"))
     "readingTime" .ReadingTime
-    "tags" (.Params.tags | default (slice))
     "categories" (.Params.categories | default (slice))
     )
   -}}

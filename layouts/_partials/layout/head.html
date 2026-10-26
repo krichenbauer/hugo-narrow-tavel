@@ -42,14 +42,9 @@
     {{- end -}}
   {{- end -}}"
 />
-<meta
-  name="keywords"
-  content="{{- with .Params.tags -}}
-    {{ delimit . `, ` }}
-  {{- else -}}
-    {{- with site.Params.keywords -}}{{ delimit . `, ` }}{{- end -}}
-  {{- end -}}"
-/>
+{{ with site.Params.keywords }}
+  <meta name="keywords" content="{{ delimit . `, ` }}" />
+{{ end }}
 <meta
   name="author"
   content="{{- with .Params.author -}}
@@ -84,8 +79,6 @@
 {{- .Scratch.Set "lightboxEnabled" $galleryConfig.lightbox -}}
 {{- .Scratch.Set "galleryConfig" $galleryConfig.galleryOptions -}}
 
-
-<link rel="manifest" href="{{ `site.webmanifest` | relURL }}" />
 {{ partial "layout/head/seo.html" . }}
 
 {{ partial "config/script.html" (dict "id" "search-config" "value" $searchConfig) }}

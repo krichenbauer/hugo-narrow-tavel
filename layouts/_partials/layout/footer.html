@@ -2,7 +2,7 @@
   {{ if site.Menus.footer }}
     <nav class="mb-6">
       <div class="flex flex-wrap items-center justify-center gap-1">
-        {{ range site.Menus.footer }}
+        {{ range partial "navigation/visible-menu.html" site.Menus.footer }}
           {{ $menuURL := .URL }}
           {{ if .PageRef }}
             {{ with site.GetPage .PageRef }}

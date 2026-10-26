@@ -14,7 +14,6 @@
       museum: "#009e73",
       park: "#f0e442",
       food: "#d55e00",
-      restaurant: "#cc79a7",
     };
     return palette[category] || "#444444";
   }

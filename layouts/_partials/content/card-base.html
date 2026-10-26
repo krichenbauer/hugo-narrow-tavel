@@ -78,17 +78,6 @@
             </div>
           {{ end }}
 
-          {{ if isset $page.Params "tags" }}
-            <div class="ml-auto flex flex-wrap items-center gap-1.5 md:ml-0">
-              {{ range $tag := $page.Params.tags }}
-                <span
-                  class="bg-muted/50 border-muted/30 flex items-center gap-1 rounded-md border px-2 py-0.5 text-xs"
-                >
-                  <span class="font-medium">{{ $tag }}</span>
-                </span>
-              {{ end }}
-            </div>
-          {{ end }}
         </div>
       </div>
     </div>
