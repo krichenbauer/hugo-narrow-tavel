@@ -66,10 +66,10 @@
 
 
         <div class="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-          {{ with $page.Params.district }}
+          {{ with partial "places/area-page.html" (dict "page" $page) }}
             <div class="flex items-center gap-1.5">
               {{ partial "features/icon.html" (dict "name" "location" "size" "sm" "ariaLabel" "") }}
-              <span class="font-medium">{{ . }}</span>
+              <span class="font-medium">{{ .Title }}</span>
             </div>
           {{ end }}
 

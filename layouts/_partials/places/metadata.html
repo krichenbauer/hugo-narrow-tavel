@@ -13,10 +13,10 @@
 
 
   <dl class="grid gap-2 text-sm">
-    {{ with $page.Params.district }}
+    {{ with partial "places/area-page.html" (dict "page" $page) }}
       <div class="grid grid-cols-[8rem_1fr] gap-2">
-        <dt class="text-muted-foreground font-medium">Stadtteil</dt>
-        <dd>{{ . }}</dd>
+        <dt class="text-muted-foreground font-medium">Gebiet</dt>
+        <dd><a class="travel-link" href="{{ .RelPermalink }}">{{ .Title }}</a></dd>
       </div>
     {{ end }}
 

@@ -19,7 +19,7 @@ The current variant extends that base toward travel-guide use cases.
 
 - Place-oriented content structure with page bundles
 - Card-based list views for places and taxonomies
-- Metadata blocks for district, address, opening hours, and links
+- Metadata blocks for area, address, opening hours, and links
 - Hero image and bundle gallery support
 - Map overview via Leaflet with OpenStreetMap attribution
 - Responsive layout and keyboard-accessible interactions

@@ -17,6 +17,11 @@
       {{- end -}}
     {{- end -}}
 
+    {{- $areaTitle := "" -}}
+    {{- with partial "places/area-page.html" (dict "page" $page) -}}
+      {{- $areaTitle = .Title -}}
+    {{- end -}}
+
     {{- $categories := $page.Params.categories | default (slice) -}}
     {{- $primaryCategory := "" -}}
     {{- if gt (len $categories) 0 -}}
@@ -30,7 +35,7 @@
       "permalink" $page.RelPermalink
       "categories" $categories
       "primaryCategory" $primaryCategory
-      "district" ($page.Params.district | default "")
+      "area" $areaTitle
       "latitude" $coords.latitude
       "longitude" $coords.longitude
       "thumbnail" $thumb
@@ -52,7 +57,6 @@
         "permalink" $area.RelPermalink
         "categories" (slice "area")
         "primaryCategory" "area"
-        "district" ($area.Params.district | default $area.Title)
         "latitude" .latitude
         "longitude" .longitude
         "thumbnail" ""

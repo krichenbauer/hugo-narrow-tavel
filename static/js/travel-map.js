@@ -66,7 +66,7 @@
         var color = markerColorFor(item);
 
         var summary = item.summary ? "<p>" + item.summary + "</p>" : "";
-        var district = item.district ? "<p><strong>Stadtteil:</strong> " + item.district + "</p>" : "";
+        var area = item.area ? "<p><strong>Gebiet:</strong> " + item.area + "</p>" : "";
         var categories = Array.isArray(item.categories) && item.categories.length
           ? "<p><strong>Kategorien:</strong> " + item.categories.join(", ") + "</p>"
           : "";
@@ -82,7 +82,7 @@
           thumb,
           summary,
           categories,
-          district,
+          area,
           '<p><a href="' + item.permalink + '">' + linkLabel + '</a></p>',
           "</article>",
         ].join("");

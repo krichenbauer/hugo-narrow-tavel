@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ $district := .Params.district | default .Title }}
+  {{ $slug := .File.ContentBaseName }}
   {{ $highlightSlugs := .Params.highlight_places }}
 
 
@@ -32,7 +32,7 @@
           {{ end }}
         {{ else }}
           {{ $highlightPages = where .Site.RegularPages "Section" "places" }}
-          {{ $highlightPages = where $highlightPages "Params.district" $district }}
+          {{ $highlightPages = where $highlightPages "Params.area" $slug }}
         {{ end }}
 
         {{ if gt (len $highlightPages) 0 }}
