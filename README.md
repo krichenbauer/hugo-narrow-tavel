@@ -37,7 +37,7 @@ The current variant extends that base toward travel-guide use cases.
 # config/_default/params.yaml
 home:
   contentOrder:
-    - intro                    # renders content/_index.md (optional)
+    - intro                    # page title as heading, then content/_index.md
     - extraordinary-highlights # 3-star places and areas
 
 map:

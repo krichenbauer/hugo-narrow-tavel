@@ -236,3 +236,13 @@
 .travel-info-row[hidden] {
   display: none;
 }
+
+/* Portrait hero images must not fill several screens; they are shown whole
+   and centered instead of cropped. */
+.travel-hero img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(70vh, 36rem);
+  margin-inline: auto;
+  object-fit: contain;
+}

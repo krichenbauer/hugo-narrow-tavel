@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="mx-auto px-4 py-6">
+  <section class="w-full">
     <header class="mb-6">
       <h1 class="mb-2 text-3xl font-bold">{{ .Title }}</h1>
       {{ with .Content }}
@@ -50,9 +50,6 @@
           </li>
         {{ end }}
       </ul>
-      <p class="text-muted-foreground mt-2 text-xs">
-        Die Markerfarben sind auf gute Unterscheidbarkeit bei Rot-Grün-Sehschwäche abgestimmt.
-      </p>
     </section>
 
     <noscript>

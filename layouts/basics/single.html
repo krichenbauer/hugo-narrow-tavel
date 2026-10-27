@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{- $hero := partial "content/resolve-title-image.html" (dict "page" .) -}}
-  <article class="mx-auto w-full px-4 py-6">
+  <article class="w-full">
     <header class="mb-6 space-y-3">
       <h1 class="text-3xl font-bold md:text-4xl">{{ .Title }}</h1>
       {{ with .Summary }}

@@ -17,39 +17,25 @@
 
 
 <section class="space-y-10">
-  <section>
-    <header class="mb-4">
-      <h2 class="text-foreground text-2xl font-bold">Sehenswürdigkeiten</h2>
-      <p class="text-muted-foreground text-sm">Nur außergewöhnliche Highlights (3 Sterne).</p>
-    </header>
-
-    {{ if gt (len $sights) 0 }}
+  {{ with $sights }}
+    <section>
+      <h2 class="text-foreground mb-4 text-2xl font-bold">Sehenswürdigkeiten</h2>
       <div class="space-y-4">
-        {{ range $sights }}
+        {{ range . }}
           {{ partial "places/card.html" (dict "page" .) }}
         {{ end }}
       </div>
-    {{ else }}
-      <p class="text-muted-foreground">
-        Noch keine außergewöhnlichen Sehenswürdigkeiten hinterlegt.
-      </p>
-    {{ end }}
-  </section>
+    </section>
+  {{ end }}
 
-  <section>
-    <header class="mb-4">
-      <h2 class="text-foreground text-2xl font-bold">Gebiete</h2>
-      <p class="text-muted-foreground text-sm">Nur außergewöhnliche Gebiete (3 Sterne).</p>
-    </header>
-
-    {{ if gt (len $areas) 0 }}
+  {{ with $areas }}
+    <section>
+      <h2 class="text-foreground mb-4 text-2xl font-bold">Gebiete</h2>
       <div class="space-y-4">
-        {{ range $areas }}
+        {{ range . }}
           {{ partial "areas/card.html" (dict "page" .) }}
         {{ end }}
       </div>
-    {{ else }}
-      <p class="text-muted-foreground">Noch keine außergewöhnlichen Gebiete hinterlegt.</p>
-    {{ end }}
-  </section>
+    </section>
+  {{ end }}
 </section>

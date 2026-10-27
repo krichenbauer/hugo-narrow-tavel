@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="mx-auto px-4 py-6">
+  <section class="w-full">
     <header class="mb-8 space-y-3">
       <h1 class="text-3xl font-bold">{{ .Title }}</h1>
       {{ with .Summary }}
@@ -17,8 +17,6 @@
           {{ partial "basics/card.html" (dict "page" .) }}
         {{ end }}
       </div>
-    {{ else }}
-      <p class="text-muted-foreground">Noch keine Übersichtsseiten vorhanden.</p>
     {{ end }}
   </section>
 {{ end }}

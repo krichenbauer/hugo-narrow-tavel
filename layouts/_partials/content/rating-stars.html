@@ -9,17 +9,17 @@
   {{- $rating = 3 -}}
 {{- end -}}
 
-{{- $legend := "3 Sterne: Außergewöhnlich, nicht verpassen. 2 Sterne: Empfohlen. 1 Stern: Gut, wenn du zusätzliche Zeit hast." -}}
+{{- $label := printf "Bewertung: %d von 3 Sternen" $rating -}}
 
 
 <span
   class="inline-flex items-center gap-2"
   data-rating="{{ $rating }}"
-  title="{{ $legend }}"
-  aria-label="{{ $legend }}"
+  role="img"
+  aria-label="{{ $label }}"
 >
-  <span class="text-muted-foreground text-xs font-medium">Bewertung</span>
-  <span class="inline-flex items-center gap-0.5 leading-none">
+  <span class="text-muted-foreground text-xs font-medium" aria-hidden="true">Bewertung</span>
+  <span class="inline-flex items-center gap-0.5 leading-none" aria-hidden="true">
     {{- range seq 1 3 -}}
       {{- if le . $rating -}}
         <span class="text-primary text-sm">&#9733;</span>

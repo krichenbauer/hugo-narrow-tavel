@@ -127,6 +127,12 @@
       {{ partial "navigation/mobile-menu-toggle.html" . }}
 
 
+      <a
+        href="{{ site.Home.RelPermalink }}"
+        class="text-foreground hover:text-primary truncate px-3 text-base font-semibold"
+        >{{ site.Title }}</a
+      >
+
       <div class="flex items-center space-x-2">
         {{ partial "ui/language-switcher.html" . }}
 

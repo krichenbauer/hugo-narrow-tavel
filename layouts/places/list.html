@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <section class="mx-auto px-4 py-6">
+  <section class="w-full">
     <header class="mb-8">
       <h1 class="mb-3 text-3xl font-bold">{{ .Title }}</h1>
       {{ with .Content }}
@@ -17,8 +17,6 @@
           {{ partial "places/card.html" (dict "page" .) }}
         {{ end }}
       </div>
-    {{ else }}
-      <p class="text-muted-foreground">Noch keine Orte vorhanden.</p>
     {{ end }}
   </section>
 {{ end }}

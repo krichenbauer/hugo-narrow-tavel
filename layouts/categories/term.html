@@ -1,8 +1,7 @@
 {{ define "main" }}
-  <section class="mx-auto px-4 py-6">
+  <section class="w-full">
     <header class="mb-8">
       <h1 class="mb-2 text-3xl font-bold">{{ .Title }}</h1>
-      <p class="text-muted-foreground">Orte in dieser Kategorie.</p>
     </header>
 
     {{ $pages := .Pages }}
@@ -13,8 +12,6 @@
           {{ partial "places/card.html" (dict "page" .) }}
         {{ end }}
       </div>
-    {{ else }}
-      <p class="text-muted-foreground">In dieser Kategorie sind noch keine Orte vorhanden.</p>
     {{ end }}
   </section>
 {{ end }}

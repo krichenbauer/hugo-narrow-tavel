@@ -24,6 +24,10 @@
     {{- end -}}
 
     {{- $categories := $page.Params.categories | default (slice) -}}
+    {{- $categoryTitles := slice -}}
+    {{- range $page.GetTerms "categories" -}}
+      {{- $categoryTitles = $categoryTitles | append .LinkTitle -}}
+    {{- end -}}
     {{- $primaryCategory := "" -}}
     {{- if gt (len $categories) 0 -}}
       {{- $primaryCategory = index $categories 0 -}}
@@ -34,7 +38,7 @@
       "title" $page.Title
       "summary" ($page.Summary | plainify)
       "permalink" $page.RelPermalink
-      "categories" $categories
+      "categories" $categoryTitles
       "primaryCategory" $primaryCategory
       "area" $areaTitle
       "latitude" $coords.latitude
@@ -50,13 +54,12 @@
   {{- $area := . -}}
   {{- with $area.Params.coordinates -}}
     {{- if and .latitude .longitude -}}
-      {{- $summary := $area.Summary | default (printf "Gebietszentrum für %s." $area.Title) -}}
       {{- $areaMarker := dict
         "type" "area"
         "title" $area.Title
-        "summary" ($summary | plainify)
+        "summary" ($area.Summary | plainify)
         "permalink" $area.RelPermalink
-        "categories" (slice "area")
+        "categories" (slice)
         "primaryCategory" "area"
         "latitude" .latitude
         "longitude" .longitude
