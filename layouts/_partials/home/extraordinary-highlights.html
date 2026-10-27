@@ -25,6 +25,12 @@
           {{ partial "places/card.html" (dict "page" .) }}
         {{ end }}
       </div>
+      {{ partial "home/more-link.html" (dict
+        "target" (site.GetPage "/categories/sightseeing")
+        "shown" $sights
+        "label" "Sehenswürdigkeiten"
+        )
+      }}
     </section>
   {{ end }}
 
@@ -36,6 +42,12 @@
           {{ partial "areas/card.html" (dict "page" .) }}
         {{ end }}
       </div>
+      {{ partial "home/more-link.html" (dict
+        "target" (site.GetPage "/areas")
+        "shown" $areas
+        "label" "Gebiete"
+        )
+      }}
     </section>
   {{ end }}
 </section>

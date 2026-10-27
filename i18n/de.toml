@@ -110,3 +110,4 @@
     highlight     = "Highlight"
     gallery       = "Galerie"
     dayTrips      = "Tagesausflüge"
+    more          = "Weitere {{ .what }}"

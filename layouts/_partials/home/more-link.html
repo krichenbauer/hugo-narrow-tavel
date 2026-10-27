@@ -1,0 +1,11 @@
+{{- /* „Weitere …“ link below a home highlight list. Shown only when the target
+  list page is published and lists more pages than the highlights. */
+-}}
+{{- with .target -}}
+  {{- if and (not (partial "helpers/is-empty-list.html" .)) (complement $.shown .Pages) -}}
+    <a class="travel-button mt-4 gap-1.5" href="{{ .RelPermalink }}" data-more>
+      {{ T "travel.more" (dict "what" $.label) }}
+      {{ partial "features/icon.html" (dict "name" "arrow-right" "size" "sm" "ariaLabel" "") }}
+    </a>
+  {{- end -}}
+{{- end -}}
