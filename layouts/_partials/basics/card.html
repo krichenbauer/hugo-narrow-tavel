@@ -21,7 +21,7 @@
           <div
             class="relative aspect-video h-full w-full overflow-hidden rounded-lg md:aspect-video"
           >
-            {{- $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType -}}
+            {{- $isRaster := ne $hero.MediaType.SubType "svg" -}}
             {{- $alt := $hero.Params.alt | default $page.Title -}}
             {{- if $isRaster -}}
               {{- $thumb := $hero.Fill "720x480" -}}

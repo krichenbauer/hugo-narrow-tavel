@@ -9,15 +9,16 @@
 {{- end -}}
 
 {{- if gt (len $gallery) 0 -}}
-  <section class="travel-gallery mt-8" aria-label="Bildergalerie">
-    <h2 class="mb-3 text-xl font-semibold">Galerie</h2>
+  <section class="travel-gallery mt-8" aria-label="{{ T `travel.gallery` }}">
+    <h2 class="mb-3 text-xl font-semibold">{{ T "travel.gallery" }}</h2>
     <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
       {{ range $idx, $img := $gallery }}
-        {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $img.MediaType.SubType }}
+        {{ $isRaster := ne $img.MediaType.SubType "svg" }}
         {{ $alt := $img.Params.alt | default $img.Title | default (printf "%s image %d" $page.Title (add $idx 1)) }}
         <figure class="m-0">
+          {{ $full := partial "content/image-derivative.html" (dict "image" $img) }}
           <a
-            href="{{ $img.RelPermalink }}"
+            href="{{ $full.RelPermalink }}"
             class="group block overflow-hidden rounded-lg border border-neutral-200"
             target="_blank"
             rel="noopener noreferrer"

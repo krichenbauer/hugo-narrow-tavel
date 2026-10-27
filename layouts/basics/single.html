@@ -10,7 +10,7 @@
 
     {{- if $hero -}}
       {{- $alt := $hero.Params.alt | default .Title -}}
-      {{- $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType -}}
+      {{- $isRaster := ne $hero.MediaType.SubType "svg" -}}
       <figure class="travel-hero not-prose mb-8">
         {{- if $isRaster -}}
           {{- $small := $hero.Fit "640x360" -}}

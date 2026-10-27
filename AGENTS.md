@@ -128,3 +128,6 @@ display text. Content is multilingual via `.<lang>.md` filename suffixes (e.g. `
 - Site-specific values (map center/zoom) come from `site.Params.map`, never hardcode a city.
 - Image captions/credits: `_partials/content/image-caption.html`, used by hero, basics hero and gallery.
 - Travel CSS lives in `assets/css/custom/travel-guide.css` (loaded separately, no Tailwind recompile needed).
+- Never link an original raster image (`.RelPermalink` of a bundle photo): use
+  `_partials/content/image-derivative.html` or `Fit`/`Fill`, so no original photo or EXIF
+  data is published. The site sets `build.publishResources: false`.

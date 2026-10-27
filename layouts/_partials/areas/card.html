@@ -20,7 +20,7 @@
       class="bg-card border-border hover:bg-primary/5 hover:border-primary/20 relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:shadow-lg md:flex-row"
     >
       {{ if $hero }}
-        {{ $isRaster := in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType }}
+        {{ $isRaster := ne $hero.MediaType.SubType "svg" }}
         {{ $alt := $hero.Params.alt | default $page.Title }}
         <div class="p-3 pb-0 md:order-last md:w-64 md:shrink-0 md:p-3 md:pl-0">
           <div

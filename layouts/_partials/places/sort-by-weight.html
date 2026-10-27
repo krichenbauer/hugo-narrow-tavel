@@ -1,0 +1,14 @@
+{{- /* Returns pages ordered by weight, then title. Pages without weight
+  (or weight 0) come last, as in Hugo's default order. */
+-}}
+{{- $keyed := slice -}}
+{{- range . -}}
+  {{- $weight := int (.Params.weight | default 0) -}}
+  {{- $rank := cond (eq $weight 0) 999999999999 (add $weight 100000000000) -}}
+  {{- $keyed = $keyed | append (dict "key" (printf "%012d|%s" $rank .Title) "page" .) -}}
+{{- end -}}
+{{- $pages := slice -}}
+{{- range sort $keyed "key" -}}
+  {{- $pages = $pages | append .page -}}
+{{- end -}}
+{{- return $pages -}}

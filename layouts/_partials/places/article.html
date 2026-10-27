@@ -1,0 +1,28 @@
+{{- /* Place and day trip page: hero, title, rating, info box, body, gallery,
+  and for places the nearby list. */
+-}}
+{{- $page := .page -}}
+<article class="mx-auto w-full px-4 py-6">
+  {{ partial "places/hero-image.html" (dict "page" $page) }}
+
+
+  <header class="mt-6 mb-4 space-y-3">
+    <h1 class="text-3xl font-bold md:text-4xl">{{ $page.Title }}</h1>
+    <div>
+      {{ partial "content/rating-stars.html" (dict "rating" $page.Params.rating) }}
+    </div>
+  </header>
+
+  {{ partial "places/info-box.html" (dict "page" $page) }}
+
+
+  <div class="prose prose-neutral dark:prose-invert mt-6 max-w-none">
+    {{ $page.Content }}
+  </div>
+
+  {{ partial "places/gallery.html" (dict "page" $page) }}
+
+  {{ if .nearby }}
+    {{ partial "places/nearby.html" (dict "page" $page) }}
+  {{ end }}
+</article>

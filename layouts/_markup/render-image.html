@@ -38,7 +38,7 @@
 {{- $height := 0 -}}
 {{- if and $imageResource (not $isExternal) -}}
   {{- $mediaType := $imageResource.MediaType.SubType -}}
-  {{- if in (slice "jpeg" "jpg" "png" "gif" "webp") $mediaType -}}
+  {{- if ne $mediaType "svg" -}}
     {{- $width = $imageResource.Width -}}
     {{- $height = $imageResource.Height -}}
   {{- end -}}

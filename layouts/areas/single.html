@@ -1,94 +1,91 @@
 {{ define "main" }}
   {{ $slug := .File.ContentBaseName }}
-  {{ $highlightSlugs := .Params.highlight_places }}
+
+  {{/* Highlights first, in their given order; then all other places of the
+    area by weight, then title.
+  */}}
+  {{ $places := where (where site.RegularPages "Section" "places") "Params.area" $slug }}
+  {{ $highlights := slice }}
+  {{ range .Params.highlight_places }}
+    {{ with site.GetPage (printf "/places/%s" .) }}
+      {{ if eq .Params.area $slug }}
+        {{ $highlights = $highlights | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $others := partial "places/sort-by-weight.html" (complement $highlights $places) }}
 
 
   <article class="mx-auto w-full px-4 py-6">
-    <header class="mb-6 space-y-3">
+    {{ partial "places/hero-image.html" (dict "page" .) }}
+
+
+    <header class="mt-6 mb-4 space-y-3">
       <h1 class="text-3xl font-bold md:text-4xl">{{ .Title }}</h1>
       <div>
         {{ partial "content/rating-stars.html" (dict "rating" .Params.rating) }}
       </div>
-      {{ with .Summary }}
-        <p class="text-muted-foreground max-w-3xl text-base md:text-lg">{{ . }}</p>
-      {{ end }}
     </header>
 
-    {{ partial "places/hero-image.html" (dict "page" .) }}
+    {{ if or .Params.best_for .Params.food_focus .Params.shopping_focus }}
+      <section class="bg-card text-card-foreground border-border rounded-xl border p-4">
+        <h2 class="mb-3 text-lg font-semibold">Gebietsprofil</h2>
 
-
-    <div class="mt-8 grid gap-8 lg:grid-cols-[2fr_1fr]">
-      <div class="min-w-0 space-y-8">
-        <div class="prose prose-neutral dark:prose-invert max-w-none">
-          {{ .Content }}
-        </div>
-
-        {{ $highlightPages := slice }}
-        {{ if and $highlightSlugs (gt (len $highlightSlugs) 0) }}
-          {{ range $highlightSlugs }}
-            {{ with $.Site.GetPage (printf "/places/%s" .) }}
-              {{ $highlightPages = $highlightPages | append . }}
-            {{ end }}
-          {{ end }}
-        {{ else }}
-          {{ $highlightPages = where .Site.RegularPages "Section" "places" }}
-          {{ $highlightPages = where $highlightPages "Params.area" $slug }}
-        {{ end }}
-
-        {{ if gt (len $highlightPages) 0 }}
-          <section class="space-y-4">
-            <h2 class="text-2xl font-semibold">Orte</h2>
-            <!--p class="text-muted-foreground text-sm">Ausgewählte Beispiele, damit der Fokus auf dem Gebiet bleibt.</p-->
-            <div class="space-y-4">
-              {{ range $highlightPages }}
-                {{ partial "places/card.html" (dict "page" .) }}
+        {{ with .Params.best_for }}
+          <div class="mb-3">
+            <h3 class="text-muted-foreground mb-2 text-sm font-medium">Geeignet für</h3>
+            <div class="flex flex-wrap gap-2">
+              {{ range . }}
+                <span
+                  class="bg-muted/50 border-muted/30 rounded-md border px-2 py-0.5 text-xs font-medium"
+                  >{{ . }}</span
+                >
               {{ end }}
             </div>
-          </section>
+          </div>
         {{ end }}
-      </div>
 
-      <aside class="space-y-4 lg:sticky lg:top-28 lg:self-start">
-        <section class="bg-card text-card-foreground border-border rounded-xl border p-4">
-          <h2 class="mb-3 text-lg font-semibold">Gebietsprofil</h2>
+        {{ with .Params.food_focus }}
+          <div class="mb-3">
+            <h3 class="text-muted-foreground mb-2 text-sm font-medium">Essen</h3>
+            <ul class="space-y-1 text-sm">
+              {{ range . }}
+                <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
 
-          {{ with .Params.best_for }}
-            <div class="mb-3">
-              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Geeignet für</h3>
-              <div class="flex flex-wrap gap-2">
-                {{ range . }}
-                  <span
-                    class="bg-muted/50 border-muted/30 rounded-md border px-2 py-0.5 text-xs font-medium"
-                    >{{ . }}</span
-                  >
-                {{ end }}
-              </div>
-            </div>
-          {{ end }}
+        {{ with .Params.shopping_focus }}
+          <div>
+            <h3 class="text-muted-foreground mb-2 text-sm font-medium">Shopping</h3>
+            <ul class="space-y-1 text-sm">
+              {{ range . }}
+                <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
 
-          {{ with .Params.food_focus }}
-            <div class="mb-3">
-              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Essen</h3>
-              <ul class="space-y-1 text-sm">
-                {{ range . }}
-                  <li>{{ . }}</li>
-                {{ end }}
-              </ul>
-            </div>
-          {{ end }}
 
-          {{ with .Params.shopping_focus }}
-            <div>
-              <h3 class="text-muted-foreground mb-2 text-sm font-medium">Shopping</h3>
-              <ul class="space-y-1 text-sm">
-                {{ range . }}
-                  <li>{{ . }}</li>
-                {{ end }}
-              </ul>
-            </div>
-          {{ end }}
-        </section>
-      </aside>
+    <div class="prose prose-neutral dark:prose-invert mt-6 max-w-none">
+      {{ .Content }}
     </div>
+
+    {{ if or $highlights $others }}
+      <section class="mt-10 space-y-4" data-area-places>
+        <h2 class="text-2xl font-semibold">{{ T "travel.places" }}</h2>
+        <div class="space-y-4">
+          {{ range $highlights }}
+            {{ partial "places/card.html" (dict "page" . "highlight" true) }}
+          {{ end }}
+          {{ range $others }}
+            {{ partial "places/card.html" (dict "page" .) }}
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
   </article>
 {{ end }}

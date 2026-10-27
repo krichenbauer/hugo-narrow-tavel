@@ -1,0 +1,40 @@
+{{- /* „In der Nähe“: up to 3 other places within 1.5 km great-circle
+  distance, nearest first, ties by title. Computed from front matter. */
+-}}
+{{- $page := .page -}}
+{{- $radius := 1500.0 -}}
+{{- $earth := 6371000.0 -}}
+{{- $candidates := slice -}}
+{{- with $page.Params.coordinates -}}
+  {{- $lat1 := math.ToRadians (float .latitude) -}}
+  {{- $lon1 := math.ToRadians (float .longitude) -}}
+  {{- range where site.RegularPages "Section" "places" -}}
+    {{- $other := . -}}
+    {{- if ne $other.Path $page.Path -}}
+      {{- with $other.Params.coordinates -}}
+        {{- $lat2 := math.ToRadians (float .latitude) -}}
+        {{- $lon2 := math.ToRadians (float .longitude) -}}
+        {{- $a := add
+          (math.Pow (math.Sin (div (sub $lat2 $lat1) 2)) 2)
+          (mul (math.Cos $lat1) (math.Cos $lat2) (math.Pow (math.Sin (div (sub $lon2 $lon1) 2)) 2))
+        -}}
+        {{- $distance := mul 2 $earth (math.Asin (math.Sqrt $a)) -}}
+        {{- if le $distance $radius -}}
+          {{- $key := printf "%09.1f|%s" $distance $other.Title -}}
+          {{- $candidates = $candidates | append (dict "key" $key "page" $other) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with first 3 (sort $candidates "key") -}}
+  <section class="mt-10 space-y-4" data-nearby>
+    <h2 class="text-2xl font-semibold">{{ T "travel.nearby" }}</h2>
+    <div class="space-y-4">
+      {{ range . }}
+        {{ partial "places/card.html" (dict "page" .page) }}
+      {{ end }}
+    </div>
+  </section>
+{{- end -}}

@@ -1,29 +1,3 @@
 {{ define "main" }}
-  <article class="mx-auto w-full px-4 py-6">
-    <header class="mb-6 space-y-3">
-      <h1 class="text-3xl font-bold md:text-4xl">{{ .Title }}</h1>
-      <div>
-        {{ partial "content/rating-stars.html" (dict "rating" .Params.rating) }}
-      </div>
-      {{ with .Summary }}
-        <p class="text-muted-foreground max-w-3xl text-base md:text-lg">{{ . }}</p>
-      {{ end }}
-    </header>
-
-    {{ partial "places/hero-image.html" (dict "page" .) }}
-
-
-    <div class="mt-8 grid gap-8 lg:grid-cols-[2fr_1fr]">
-      <div class="min-w-0">
-        <div class="prose prose-neutral dark:prose-invert max-w-none">
-          {{ .Content }}
-        </div>
-        {{ partial "places/gallery.html" (dict "page" .) }}
-      </div>
-
-      <aside class="lg:sticky lg:top-28 lg:self-start">
-        {{ partial "places/metadata.html" (dict "page" .) }}
-      </aside>
-    </div>
-  </article>
+  {{ partial "places/article.html" (dict "page" . "nearby" true) }}
 {{ end }}

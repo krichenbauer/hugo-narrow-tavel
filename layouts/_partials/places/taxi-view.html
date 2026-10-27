@@ -1,0 +1,19 @@
+{{- /* Full-screen view of the Japanese name and address for taxi drivers.
+  Opened by js/taxi-view.js; closes with its button or the Escape key. */
+-}}
+<dialog id="taxi-view" class="taxi-view" aria-label="{{ T `travel.taxiTitle` }}">
+  <div class="taxi-view-content">
+    {{ with .nameJa }}
+      <p class="taxi-view-name" lang="ja">{{ . }}</p>
+    {{ end }}
+    {{ with .addressJa }}
+      <p class="taxi-view-address" lang="ja">{{ . }}</p>
+    {{ end }}
+    <form method="dialog">
+      <button type="submit" class="travel-button taxi-view-close">
+        {{ T "travel.taxiClose" }}
+      </button>
+    </form>
+  </div>
+</dialog>
+<script src="{{ `js/taxi-view.js` | relURL }}" defer></script>

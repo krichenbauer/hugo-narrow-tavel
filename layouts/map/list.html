@@ -16,6 +16,7 @@
       {{/* Only list marker colors for categories that are used as primary category. */}}
       {{ $knownCategories := slice "sightseeing" "viewpoint" "museum" "park" "food" }}
       {{ $usedCategories := slice }}
+      {{ $dayTrips := where site.RegularPages "Section" "day-trips" }}
       {{ range where site.RegularPages "Section" "places" }}
         {{ with .Params.categories }}
           {{ $usedCategories = $usedCategories | append (index . 0) }}
@@ -27,6 +28,12 @@
           <span class="travel-map-dot travel-map-dot-area" aria-hidden="true"></span>
           <span>Gebiete</span>
         </li>
+        {{ if $dayTrips }}
+          <li class="travel-map-legend-item">
+            <span class="travel-map-dot travel-map-dot-daytrip" aria-hidden="true"></span>
+            <span>{{ T "travel.dayTrips" }}</span>
+          </li>
+        {{ end }}
         {{ range $knownCategories }}
           {{ if in $usedCategories . }}
             {{ $term := site.GetPage (printf "/categories/%s" .) }}

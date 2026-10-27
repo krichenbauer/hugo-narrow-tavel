@@ -1,0 +1,91 @@
+{{- /* „Praktische Infos“: collapsed by default, works without JavaScript.
+  Never shows address, opening hours, or raw coordinates. */
+-}}
+{{- $page := .page -}}
+{{- $coords := $page.Params.coordinates -}}
+{{- $nameJa := $page.Params.name_ja -}}
+{{- $addressJa := $page.Params.address_ja -}}
+{{- $area := partial "places/area-page.html" (dict "page" $page) -}}
+{{- $external := `target="_blank" rel="noopener noreferrer"` | safeHTMLAttr -}}
+<details class="travel-info">
+  <summary class="travel-info-summary">{{ T "travel.infoBox" }}</summary>
+
+  <div class="travel-info-body space-y-4 text-sm">
+    {{ if or $area $nameJa $addressJa }}
+      <dl class="grid gap-2">
+        {{ with $area }}
+          <div class="travel-info-row">
+            <dt>{{ T "travel.area" }}</dt>
+            <dd><a class="travel-link" href="{{ .RelPermalink }}">{{ .Title }}</a></dd>
+          </div>
+        {{ end }}
+        {{ with $nameJa }}
+          <div class="travel-info-row">
+            <dt>{{ T "travel.nameJa" }}</dt>
+            <dd lang="ja">{{ . }}</dd>
+          </div>
+        {{ end }}
+        {{ with $addressJa }}
+          <div class="travel-info-row" data-taxi-fallback>
+            <dt>{{ T "travel.addressJa" }}</dt>
+            <dd lang="ja">{{ . }}</dd>
+          </div>
+        {{ end }}
+      </dl>
+    {{ end }}
+
+    {{ with $page.GetTerms "categories" }}
+      <div class="flex flex-wrap gap-2" role="group" aria-label="{{ T `travel.categories` }}">
+        {{ range . }}
+          <a class="travel-badge" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ with $coords }}
+      {{ $lat := .latitude }}
+      {{ $lon := .longitude }}
+      <div
+        class="flex flex-wrap gap-2"
+        role="group"
+        aria-label="{{ T `travel.mapLinks` }}"
+        data-map-links
+      >
+        <a
+          class="travel-button"
+          href="{{ printf `https://www.google.com/maps/search/?api=1&query=%v,%v` $lat $lon }}"
+          {{ $external }}
+          >{{ T "travel.googleMaps" }}</a
+        >
+        <a
+          class="travel-button"
+          href="{{ printf `https://maps.apple.com/?ll=%v,%v&q=%s` $lat $lon (urlquery $page.Title) }}"
+          {{ $external }}
+          >{{ T "travel.appleMaps" }}</a
+        >
+        <a
+          class="travel-button"
+          href="{{ printf `https://www.openstreetmap.org/?mlat=%v&mlon=%v#map=17/%v/%v` $lat $lon $lat $lon }}"
+          {{ $external }}
+          >{{ T "travel.openStreetMap" }}</a
+        >
+      </div>
+    {{ end }}
+
+    {{ with $page.Params.website }}
+      <p>
+        <a class="travel-link" href="{{ . }}" {{ $external }}>{{ T "travel.website" }}</a>
+      </p>
+    {{ end }}
+
+    {{ if or $nameJa $addressJa }}
+      <button type="button" class="travel-button" data-taxi-open aria-controls="taxi-view" hidden>
+        {{ T "travel.taxiOpen" }}
+      </button>
+    {{ end }}
+  </div>
+</details>
+
+{{ if or $nameJa $addressJa }}
+  {{ partial "places/taxi-view.html" (dict "nameJa" $nameJa "addressJa" $addressJa) }}
+{{ end }}

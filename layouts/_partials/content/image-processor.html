@@ -30,17 +30,17 @@
 
   {{- if not $isRootRelative -}}
     {{- with $context.Resources.GetMatch $searchPath -}}
-      {{- $resource = . -}}
+      {{- $resource = partial "content/image-derivative.html" (dict "image" .) -}}
       {{- $resourceType = "page" -}}
-      {{- $finalUrl = .RelPermalink -}}
+      {{- $finalUrl = $resource.RelPermalink -}}
     {{- end -}}
   {{- end -}}
 
   {{- if not $resource -}}
     {{- with resources.Get $searchPath -}}
-      {{- $resource = . -}}
+      {{- $resource = partial "content/image-derivative.html" (dict "image" .) -}}
       {{- $resourceType = "global" -}}
-      {{- $finalUrl = .RelPermalink -}}
+      {{- $finalUrl = $resource.RelPermalink -}}
     {{- else -}}
       {{- $resourceType = "static" -}}
       {{- $finalUrl = $searchPath | relURL -}}
@@ -63,10 +63,8 @@
       {{ with $caption }}title="{{ . }}"{{ end }}
       {{ if and $resource (not $isExternal) }}
         {{ $mediaType := $resource.MediaType.SubType }}
-        {{ if in (slice "jpeg" "jpg" "png" "gif" "webp" "svg") $mediaType }}
-          {{ if ne $mediaType "svg" }}
-            width="{{ $resource.Width }}" height="{{ $resource.Height }}"
-          {{ end }}
+        {{ if ne $mediaType "svg" }}
+          width="{{ $resource.Width }}" height="{{ $resource.Height }}"
         {{ end }}
       {{ end }}
       loading="lazy"

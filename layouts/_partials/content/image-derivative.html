@@ -1,0 +1,9 @@
+{{- /* Returns a resized and re-encoded copy of a raster image, so that no
+  original photo and none of its EXIF data is published. SVG images are
+  returned unchanged; formats Hugo cannot process fail the build. */
+-}}
+{{- $image := .image -}}
+{{- if ne $image.MediaType.SubType "svg" -}}
+  {{- $image = $image.Fit (.size | default "1920x1920") -}}
+{{- end -}}
+{{- return $image -}}

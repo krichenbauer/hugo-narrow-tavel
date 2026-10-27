@@ -1,15 +1,16 @@
 {{- $markers := slice -}}
-{{- $allPlaces := where .Site.RegularPages "Section" "places" -}}
+{{- $allPlaces := where .Site.RegularPages "Section" "in" (slice "places" "day-trips") -}}
 
 {{- range $allPlaces -}}
   {{- $page := . -}}
+  {{- $type := cond (eq $page.Section "day-trips") "daytrip" "place" -}}
   {{- $coords := $page.Params.coordinates -}}
   {{- if and $coords $coords.latitude $coords.longitude -}}
     {{- $hero := partial "content/resolve-title-image.html" (dict "page" $page) -}}
 
     {{- $thumb := "" -}}
     {{- if $hero -}}
-      {{- if in (slice "jpeg" "jpg" "png" "webp" "gif") $hero.MediaType.SubType -}}
+      {{- if ne $hero.MediaType.SubType "svg" -}}
         {{- $thumbImg := $hero.Fill "320x210" -}}
         {{- $thumb = $thumbImg.RelPermalink -}}
       {{- else -}}
@@ -29,7 +30,7 @@
     {{- end -}}
 
     {{- $marker := dict
-      "type" "place"
+      "type" $type
       "title" $page.Title
       "summary" ($page.Summary | plainify)
       "permalink" $page.RelPermalink
