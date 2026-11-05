@@ -78,6 +78,12 @@
       </p>
     {{ end }}
 
+    {{ with $page.Params.wikipedia }}
+      <p>
+        <a class="travel-link" href="{{ . }}" {{ $external }}>{{ T "travel.wikipedia" }}</a>
+      </p>
+    {{ end }}
+
     {{ if or $nameJa $addressJa }}
       <button type="button" class="travel-button" data-taxi-open aria-controls="taxi-view" hidden>
         {{ T "travel.taxiOpen" }}

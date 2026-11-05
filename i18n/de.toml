@@ -102,6 +102,7 @@
     appleMaps     = "Apple Karten"
     openStreetMap = "OpenStreetMap"
     website       = "Offizielle Website"
+    wikipedia     = "Wikipedia"
     taxiOpen      = "Für Taxifahrer zeigen"
     taxiTitle     = "Für Taxifahrer"
     taxiClose     = "Schließen"
