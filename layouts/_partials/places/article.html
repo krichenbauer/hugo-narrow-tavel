@@ -1,5 +1,5 @@
-{{- /* Place and day trip page: hero, title, rating, info box, body, gallery,
-  and for places the nearby list. */
+{{- /* Place page: hero, title, rating, info box, body, gallery, and the
+  nearby list. */
 -}}
 {{- $page := .page -}}
 <article class="w-full">
@@ -22,7 +22,5 @@
 
   {{ partial "places/gallery.html" (dict "page" $page) }}
 
-  {{ if .nearby }}
-    {{ partial "places/nearby.html" (dict "page" $page) }}
-  {{ end }}
+  {{ partial "places/nearby.html" (dict "page" $page) }}
 </article>

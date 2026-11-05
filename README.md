@@ -2,7 +2,7 @@
 
 This theme is tailored for responsive travel-guide sites built with Hugo.
 
-It is intended for content models centered around areas, places, day trips, map overviews,
+It is intended for content models centered around areas, places, map overviews,
 and practical trip information, while keeping Markdown content portable for
 future exports (for example EPUB or PDF workflows).
 
@@ -17,12 +17,12 @@ The current variant extends that base toward travel-guide use cases.
 
 ## Travel-Guide Focus
 
-- Place-oriented content structure with page bundles (areas, places, day trips)
-- Card-based list views for places, day trips, and taxonomies
+- Place-oriented content structure with page bundles (areas, places)
+- Card-based list views for places and taxonomies
 - Area pages list all places of the area (`area` slug), `highlight_places` first
-- Place and day trip pages: hero, title, rating, a collapsible „Praktische Infos“ box
+- Place pages: hero, title, rating, a collapsible „Praktische Infos“ box
   (area, `name_ja`, categories, Google/Apple/OpenStreetMap links, website, taxi view),
-  body, gallery, and on places „In der Nähe“ (up to 3 places within 1.5 km)
+  body, gallery, and „In der Nähe“ (up to 3 places within 1.5 km)
 - Taxi view: full-screen `name_ja`/`address_ja` (`static/js/taxi-view.js`); without
   JavaScript the address is shown as text instead
 - Hero image and bundle gallery support; only resized derivatives of raster images are
@@ -64,9 +64,9 @@ The hero is excluded from the gallery. Area pages show a hero image as well; bas
 
 ## Map Legend
 
-Areas and places are circles, day trips are squares. Marker colors exist for `area`,
-`daytrip`, `sightseeing`, `viewpoint`, `museum`, `park`, and `food` (first category of a
-place). The legend only lists categories in use, and day trips only when there are any.
+Areas and places are circles. Marker colors exist for `area`, `sightseeing`, `viewpoint`,
+`museum`, `park`, and `food` (first category of a place). The legend only lists categories
+in use.
 
 ## Development
 

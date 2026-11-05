@@ -5,11 +5,10 @@
   }
 
   function markerColorFor(item) {
-    var category = item.type === "daytrip" ? "daytrip" : (item.primaryCategory || "").toLowerCase();
+    var category = (item.primaryCategory || "").toLowerCase();
     // Colorblind-safe palette inspired by Okabe-Ito colors.
     var palette = {
       area: "#0072b2",
-      daytrip: "#cc79a7",
       sightseeing: "#e69f00",
       viewpoint: "#56b4e9",
       museum: "#009e73",
@@ -27,7 +26,8 @@
     return item.type === "area" ? 3 : 2;
   }
 
-  // The initial view comes from params.map; day trips appear when zooming out.
+  // The initial view comes from params.map; places farther away appear when
+  // zooming out.
   var dataUrl = window.travelMapDataUrl || "/map/index.json";
   var map = L.map(mapEl, {
     scrollWheelZoom: true,
@@ -73,7 +73,7 @@
           ? '<img src="' + item.thumbnail + '" alt="' + item.title + '" loading="lazy" decoding="async">'
           : "";
 
-        var linkLabel = { area: "Gebiet ansehen", daytrip: "Ausflug ansehen" }[item.type] || "Ort ansehen";
+        var linkLabel = item.type === "area" ? "Gebiet ansehen" : "Ort ansehen";
 
         var popupHtml = [
           '<article class="travel-popup">',
@@ -86,20 +86,14 @@
           "</article>",
         ].join("");
 
-        // Day trips are squares; areas and places are circles.
-        var marker = item.type === "daytrip"
-          ? L.marker([lat, lon], {
-              pane: "placesPane",
-              icon: L.divIcon({ className: "travel-map-daytrip", iconSize: [16, 16] }),
-            })
-          : L.circleMarker([lat, lon], {
-              pane: item.type === "area" ? "areasPane" : "placesPane",
-              radius: markerRadiusFor(item),
-              color: "#ffffff",
-              weight: markerBorderFor(item),
-              fillColor: color,
-              fillOpacity: 0.95,
-            });
+        var marker = L.circleMarker([lat, lon], {
+          pane: item.type === "area" ? "areasPane" : "placesPane",
+          radius: markerRadiusFor(item),
+          color: "#ffffff",
+          weight: markerBorderFor(item),
+          fillColor: color,
+          fillOpacity: 0.95,
+        });
         marker.addTo(map).bindPopup(popupHtml);
       });
     })
