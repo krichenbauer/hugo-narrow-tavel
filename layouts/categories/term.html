@@ -4,6 +4,21 @@
       <h1 class="mb-2 text-3xl font-bold">{{ .Title }}</h1>
     </header>
 
+    {{ $basics := slice }}
+    {{ range .Params.basics }}
+      {{ with site.GetPage (printf "/basics/%s" .) }}
+        {{ $basics = $basics | append . }}
+      {{ end }}
+    {{ end }}
+
+    {{ with $basics }}
+      <div class="mb-4 space-y-4" data-category-basics>
+        {{ range . }}
+          {{ partial "basics/card.html" (dict "page" .) }}
+        {{ end }}
+      </div>
+    {{ end }}
+
     {{ $pages := .Pages }}
 
     {{ if gt (len $pages) 0 }}

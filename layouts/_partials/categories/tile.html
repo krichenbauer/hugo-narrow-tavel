@@ -1,0 +1,67 @@
+{{- /* Category tile for the categories overview: up to three hero thumbnails
+  of the category's pages (best rated first, then by weight and title), the
+  title, and the number of pages. The thumbnails are decorative (empty alt),
+  so the link reads as the category title and count. */
+-}}
+{{- $page := .page -}}
+
+{{- $ranked := slice -}}
+{{- range $index, $p := partial "places/sort-by-weight.html" $page.Pages -}}
+  {{- $rating := int ($p.Params.rating | default 0) -}}
+  {{- $key := printf "%d|%06d" (sub 3 $rating) $index -}}
+  {{- $ranked = $ranked | append (dict "key" $key "page" $p) -}}
+{{- end -}}
+
+{{- $thumbs := slice -}}
+{{- range sort $ranked "key" -}}
+  {{- if lt (len $thumbs) 3 -}}
+    {{- with partial "content/resolve-title-image.html" (dict "page" .page) -}}
+      {{- $thumbs = $thumbs | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+
+<a
+  href="{{ $page.RelPermalink }}"
+  class="travel-card group bg-card border-border hover:bg-primary/5 hover:border-primary/20 focus-visible:ring-primary/30 block overflow-hidden rounded-xl border transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2"
+  data-category-tile
+>
+  <div class="bg-muted/50 h-40 overflow-hidden">
+    <div class="flex h-full gap-1 transition-transform duration-300 group-hover:scale-105">
+      {{ range $thumbs }}
+        {{ $image := . }}
+        {{ if eq $image.MediaType.SubType "svg" }}
+          <img
+            src="{{ $image.RelPermalink }}"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="h-full w-0 flex-1 object-cover"
+          />
+        {{ else }}
+          {{ $thumb := $image.Fill "600x400" }}
+          <img
+            src="{{ $thumb.RelPermalink }}"
+            alt=""
+            width="{{ $thumb.Width }}"
+            height="{{ $thumb.Height }}"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-0 flex-1 object-cover"
+          />
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+  <div class="flex items-baseline justify-between gap-3 p-5">
+    <h2
+      class="text-foreground group-hover:text-primary text-xl leading-tight font-bold transition-colors duration-200"
+    >
+      {{ $page.LinkTitle }}
+    </h2>
+    <span class="text-muted-foreground shrink-0 text-sm" data-count>
+      {{ T "travel.entries" (dict "count" .count) }}
+    </span>
+  </div>
+</a>
