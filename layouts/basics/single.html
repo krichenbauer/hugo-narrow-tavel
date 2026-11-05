@@ -13,9 +13,10 @@
       {{- $isRaster := ne $hero.MediaType.SubType "svg" -}}
       <figure class="travel-hero not-prose mb-8">
         {{- if $isRaster -}}
-          {{- $small := $hero.Fit "640x360" -}}
-          {{- $medium := $hero.Fit "960x540" -}}
-          {{- $large := $hero.Fit "1440x810" -}}
+          {{- $upright := partial "content/upright-image.html" $hero -}}
+          {{- $small := $upright.Fit "640x360" -}}
+          {{- $medium := $upright.Fit "960x540" -}}
+          {{- $large := $upright.Fit "1440x810" -}}
           <img
             src="{{ $large.RelPermalink }}"
             srcset="

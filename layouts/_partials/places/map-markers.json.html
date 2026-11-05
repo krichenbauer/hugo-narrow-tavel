@@ -10,7 +10,7 @@
     {{- $thumb := "" -}}
     {{- if $hero -}}
       {{- if ne $hero.MediaType.SubType "svg" -}}
-        {{- $thumbImg := $hero.Fill "320x210" -}}
+        {{- $thumbImg := (partial "content/upright-image.html" $hero).Fill "320x210" -}}
         {{- $thumb = $thumbImg.RelPermalink -}}
       {{- else -}}
         {{- $thumb = $hero.RelPermalink -}}

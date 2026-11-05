@@ -4,6 +4,6 @@
 -}}
 {{- $image := .image -}}
 {{- if ne $image.MediaType.SubType "svg" -}}
-  {{- $image = $image.Fit (.size | default "1920x1920") -}}
+  {{- $image = (partial "content/upright-image.html" $image).Fit (.size | default "1920x1920") -}}
 {{- end -}}
 {{- return $image -}}

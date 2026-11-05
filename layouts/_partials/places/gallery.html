@@ -24,7 +24,7 @@
             rel="noopener noreferrer"
           >
             {{ if $isRaster }}
-              {{ $thumb := $img.Fill "720x540" }}
+              {{ $thumb := (partial "content/upright-image.html" $img).Fill "720x540" }}
               <img
                 src="{{ $thumb.RelPermalink }}"
                 width="{{ $thumb.Width }}"

@@ -24,7 +24,7 @@
             {{- $isRaster := ne $hero.MediaType.SubType "svg" -}}
             {{- $alt := $hero.Params.alt | default $page.Title -}}
             {{- if $isRaster -}}
-              {{- $thumb := $hero.Fill "720x480" -}}
+              {{- $thumb := (partial "content/upright-image.html" $hero).Fill "720x480" -}}
               <img
                 src="{{ $thumb.RelPermalink }}"
                 alt="{{ $alt }}"

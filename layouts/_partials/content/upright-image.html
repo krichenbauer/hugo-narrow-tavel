@@ -1,0 +1,9 @@
+{{- /* Returns a raster image rotated and flipped upright according to its EXIF
+  orientation. Derivatives carry no EXIF data, so every resized image must be
+  made from this upright copy. Other images are returned unchanged. */
+-}}
+{{- $image := . -}}
+{{- if ne $image.MediaType.SubType "svg" -}}
+  {{- $image = $image.Filter images.AutoOrient -}}
+{{- end -}}
+{{- return $image -}}

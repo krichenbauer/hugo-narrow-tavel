@@ -27,7 +27,7 @@
             class="relative aspect-video h-full w-full overflow-hidden rounded-lg md:aspect-video"
           >
             {{ if $isRaster }}
-              {{ $thumb := $hero.Fill "720x480" }}
+              {{ $thumb := (partial "content/upright-image.html" $hero).Fill "720x480" }}
               <img
                 src="{{ $thumb.RelPermalink }}"
                 alt="{{ $alt }}"
