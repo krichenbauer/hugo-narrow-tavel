@@ -19,7 +19,8 @@ The current variant extends that base toward travel-guide use cases.
 
 - Place-oriented content structure with page bundles (areas, places)
 - Card-based list views for places and taxonomies
-- Area pages list all places of the area (`area` slug), `highlight_places` first
+- Lists of places and areas are ordered by rating (best first), then title;
+  area pages list all places of the area (`area` slug), `highlight_places` first
 - Place pages: hero, title, rating, a collapsible „Praktische Infos“ box
   (area, `name_ja`, categories, Google/Apple/OpenStreetMap links, website, Wikipedia,
   taxi view), body, gallery, and „In der Nähe“ (up to 3 places within 1.5 km)

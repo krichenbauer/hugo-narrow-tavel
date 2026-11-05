@@ -7,9 +7,7 @@
       {{ end }}
     </header>
 
-    {{ $featured := where .Pages "Params.featured" true }}
-    {{ $others := where .Pages "Params.featured" "!=" true }}
-    {{ $pages := $featured | append $others }}
+    {{ $pages := partial "places/sort-by-rating.html" .Pages }}
 
     {{ if gt (len $pages) 0 }}
       <div class="space-y-4">

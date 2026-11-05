@@ -19,7 +19,7 @@
       </div>
     {{ end }}
 
-    {{ $pages := .Pages }}
+    {{ $pages := partial "places/sort-by-rating.html" .Pages }}
 
     {{ if gt (len $pages) 0 }}
       <div class="space-y-4">

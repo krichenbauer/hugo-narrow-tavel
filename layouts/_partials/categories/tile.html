@@ -1,21 +1,14 @@
 {{- /* Category tile for the categories overview: up to three hero thumbnails
-  of the category's pages (best rated first, then by weight and title), the
+  of the category's pages (best rated first, then by title), the
   title, and the number of pages. The thumbnails are decorative (empty alt),
   so the link reads as the category title and count. */
 -}}
 {{- $page := .page -}}
 
-{{- $ranked := slice -}}
-{{- range $index, $p := partial "places/sort-by-weight.html" $page.Pages -}}
-  {{- $rating := int ($p.Params.rating | default 0) -}}
-  {{- $key := printf "%d|%06d" (sub 3 $rating) $index -}}
-  {{- $ranked = $ranked | append (dict "key" $key "page" $p) -}}
-{{- end -}}
-
 {{- $thumbs := slice -}}
-{{- range sort $ranked "key" -}}
+{{- range partial "places/sort-by-rating.html" $page.Pages -}}
   {{- if lt (len $thumbs) 3 -}}
-    {{- with partial "content/resolve-title-image.html" (dict "page" .page) -}}
+    {{- with partial "content/resolve-title-image.html" (dict "page" .) -}}
       {{- $thumbs = $thumbs | append . -}}
     {{- end -}}
   {{- end -}}

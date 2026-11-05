@@ -7,7 +7,7 @@
       {{ end }}
     </header>
 
-    {{ $areas := .Pages.ByWeight }}
+    {{ $areas := partial "places/sort-by-rating.html" .Pages }}
     {{ if gt (len $areas) 0 }}
       <div class="space-y-4">
         {{ range $areas }}

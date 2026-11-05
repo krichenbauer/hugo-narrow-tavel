@@ -1,0 +1,5 @@
+{{- /* Returns pages ordered by rating (best first), then by title. Hugo's sort
+  is stable, so sorting by title first keeps ties in title order. */
+-}}
+{{- $pages := sort . "Title" -}}
+{{- return sort $pages "Params.rating" "desc" -}}

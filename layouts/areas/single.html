@@ -2,7 +2,7 @@
   {{ $slug := .File.ContentBaseName }}
 
   {{/* Highlights first, in their given order; then all other places of the
-    area by weight, then title.
+    area by rating, then title.
   */}}
   {{ $places := where (where site.RegularPages "Section" "places") "Params.area" $slug }}
   {{ $highlights := slice }}
@@ -13,7 +13,7 @@
       {{ end }}
     {{ end }}
   {{ end }}
-  {{ $others := partial "places/sort-by-weight.html" (complement $highlights $places) }}
+  {{ $others := partial "places/sort-by-rating.html" (complement $highlights $places) }}
 
 
   <article class="w-full">

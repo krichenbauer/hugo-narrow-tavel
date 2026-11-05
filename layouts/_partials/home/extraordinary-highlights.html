@@ -9,11 +9,11 @@
     {{ $sights = $sights | append . }}
   {{ end }}
 {{ end }}
-{{ $sights = sort $sights "Weight" "asc" }}
+{{ $sights = partial "places/sort-by-rating.html" $sights }}
 
 {{ $areas := where .Site.RegularPages "Section" "areas" }}
 {{ $areas = where $areas "Params.rating" 3 }}
-{{ $areas = sort $areas "Weight" "asc" }}
+{{ $areas = partial "places/sort-by-rating.html" $areas }}
 
 
 <section class="space-y-10">
